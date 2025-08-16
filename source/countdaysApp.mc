@@ -33,7 +33,7 @@ using Toybox.Sensor as Sensor;
 //! The main WatchFace View
 class DayCounterWatchFaceView extends Ui.WatchFace {
 
-    private var leftHalfGraphic;
+    private var yellowRibbon;
     private var fontDayCount;
     private var fontDataFields;
     private var screenWidth;
@@ -51,11 +51,7 @@ class DayCounterWatchFaceView extends Ui.WatchFace {
         screenHeight = dc.getHeight();
 
         // Load the custom graphics.
-        // NOTE: You must place your graphic file in the project's 'resources/drawables/' folder.
-        // For example, a file named 'graphic.svg' in that folder will be loaded by this line.
-        // You will need to create a `drawables.xml` file in `resources` to define this resource.
-        // <drawable-list id="leftHalfGraphic"><bitmap id="leftHalfGraphicBitmap" filename="your_graphic_file_name.svg" /></drawable-list>
-        leftHalfGraphic = Ui.loadResource(Rez.Drawables.yellowRibbonBitmap);
+        yellowRibbon = Ui.loadResource(Rez.Drawables.yellowRibbonBitmap);
 
         // Load fonts for the data fields. You can create custom fonts if desired.
         // fontDayCount = Ui.loadResource(Rez.Fonts.DayCountFont);
@@ -84,12 +80,8 @@ class DayCounterWatchFaceView extends Ui.WatchFace {
         dc.setColor(Gfx.COLOR_BLACK, Gfx.COLOR_BLACK);
         dc.clear();
 
-        // Get the current time and date
-        var clockTime = Sys.getClockTime();
-
         // --- Calculate days passed since October 7, 2023 ---
         // Define the start date (October 7, 2023)
-        // Create the start date Moment (October 7, 2023)
         var oct_7_2023 = new Time.Moment(1696649340);
         // Get the current date
         var today = new Time.Moment(Time.today().value());
@@ -99,15 +91,22 @@ class DayCounterWatchFaceView extends Ui.WatchFace {
         var daysPassed = duration.value() / (60 * 60 * 24); // Convert seconds to days
 
         // --- Draw the graphics and day count ---
-        var graphicWidth = screenWidth / 2;
-        var graphicHeight = screenHeight;
 
         // Draw the custom graphic on the left half
-        if (leftHalfGraphic != null) {
+        if (yellowRibbon != null) {
             // The graphic is centered vertically in the left half
-            var graphicX = (graphicWidth - leftHalfGraphic.getWidth()) / 2;
-            var graphicY = (graphicHeight - leftHalfGraphic.getHeight()) / 2;
-            dc.drawBitmap(graphicX, graphicY, leftHalfGraphic);
+            var graphicX = screenWidth * 0.1;
+            var graphicY = screenHeight * 0.1;
+            var graphicWidth = screenWidth * 0.6;
+            var graphicHeight = screenHeight * 0.8;
+            dc.drawScaledBitmap(
+                graphicX, // X position
+                graphicY, // Y position
+                graphicWidth, // Width to scale to
+                graphicHeight, // Height to scale to
+                yellowRibbon // Bitmap to draw
+            );
+            // dc.drawBitmap(graphicX, graphicY, yellowRibbon);
         }
 
         // Draw the day count on the right half
