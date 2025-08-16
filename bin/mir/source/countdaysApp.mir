@@ -1,0 +1,658 @@
+[ @file = "/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc"; @line = 4; @symbol_usingdef<0> = [Toybox,4,6,12]; @symbol_usingdef<1> = [Application,4,13,24]; @symbol_usingAlias = [App,4,28,31]; ]
+using Toybox.Application as :App;
+[ @file = "/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc"; @line = 5; @symbol_usingdef<0> = [Toybox,5,6,12]; @symbol_usingdef<1> = [WatchUi,5,13,20]; @symbol_usingAlias = [Ui,5,24,26]; ]
+using Toybox.WatchUi as :Ui;
+//! The main application class
+[ @file = "/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc"; @line = 8; @symbol_classdef = [DayCounterWatchFaceApp,8,6,28]; @symbol_extends<0> = [App,8,37,40]; @symbol_extends<1> = [AppBase,8,41,48]; ]
+class DayCounterWatchFaceApp extends App.AppBase {
+    [ @file = "/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc"; @line = 8; ]
+    <init> {
+    }
+    [ @file = "/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc"; @line = 8; ]
+    static
+    <init> {
+    }
+    //! Constructor
+    [ @file = "/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc"; @line = 11; @symbol_functiondef = [initialize,11,13,23]; ]
+    function initialize() as Void {
+_Users_shaibenjamin_Personal_git_countdays_source_countdaysApp_mc_11_26_13_4_start:
+[ "/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc" 12 8 ]
+        symbol [ AppBase %tmp.2 12 8 15 ];
+        %tmp.2 = getv ? :AppBase;
+        symbol [ initialize %tmp.3 12 16 26 ];
+        %tmp.3 = getv function %tmp.2 :initialize;
+        invoke %tmp.2 %tmp.3();
+_Users_shaibenjamin_Personal_git_countdays_source_countdaysApp_mc_11_26_13_4_stop:
+    }
+    //! On app startup, create the initial view
+    //! @return Array of View and InputDelegate
+    [ @file = "/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc"; @line = 17; @symbol_functiondef = [getInitialView,17,13,27]; ]
+    function getInitialView() {
+_Users_shaibenjamin_Personal_git_countdays_source_countdaysApp_mc_17_30_19_4_start:
+[ "/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc" 18 8 ]
+        %tmp.1 = newa 1;
+        symbol [ DayCounterWatchFaceView %tmp.5 18 21 44 ];
+        %tmp.5 = getv ? :DayCounterWatchFaceView;
+        %tmp.2 = newc %tmp.5 ();
+        %tmp.6 = dup %tmp.1;
+        %tmp.7 = aputv %tmp.6 0 %tmp.2;
+        ret %tmp.7;
+_Users_shaibenjamin_Personal_git_countdays_source_countdaysApp_mc_17_30_19_4_stop:
+    }
+}
+[ @file = "/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc"; @line = 25; @symbol_usingdef<0> = [Toybox,25,6,12]; @symbol_usingdef<1> = [Graphics,25,13,21]; @symbol_usingAlias = [Gfx,25,25,28]; ]
+using Toybox.Graphics as :Gfx;
+[ @file = "/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc"; @line = 26; @symbol_usingdef<0> = [Toybox,26,6,12]; @symbol_usingdef<1> = [WatchUi,26,13,20]; @symbol_usingAlias = [Ui,26,24,26]; ]
+using Toybox.WatchUi as :Ui;
+[ @file = "/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc"; @line = 27; @symbol_usingdef<0> = [Toybox,27,6,12]; @symbol_usingdef<1> = [System,27,13,19]; @symbol_usingAlias = [Sys,27,23,26]; ]
+using Toybox.System as :Sys;
+[ @file = "/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc"; @line = 28; @symbol_usingdef<0> = [Toybox,28,6,12]; @symbol_usingdef<1> = [Time,28,13,17]; @symbol_usingAlias = [Time,28,21,25]; ]
+using Toybox.Time as :Time;
+[ @file = "/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc"; @line = 29; @symbol_usingdef<0> = [Toybox,29,6,12]; @symbol_usingdef<1> = [Time,29,13,17]; @symbol_usingdef<2> = [Gregorian,29,18,27]; @symbol_usingAlias = [Greg,29,31,35]; ]
+using Toybox.Time.Gregorian as :Greg;
+[ @file = "/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc"; @line = 30; @symbol_usingdef<0> = [Toybox,30,6,12]; @symbol_usingdef<1> = [ActivityMonitor,30,13,28]; @symbol_usingAlias = [Am,30,32,34]; ]
+using Toybox.ActivityMonitor as :Am;
+[ @file = "/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc"; @line = 31; @symbol_usingdef<0> = [Toybox,31,6,12]; @symbol_usingdef<1> = [Sensor,31,13,19]; @symbol_usingAlias = [Sensor,31,23,29]; ]
+using Toybox.Sensor as :Sensor;
+//! The main WatchFace View
+[ @file = "/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc"; @line = 34; @symbol_classdef = [DayCounterWatchFaceView,34,6,29]; @symbol_extends<0> = [Ui,34,38,40]; @symbol_extends<1> = [WatchFace,34,41,50]; ]
+class DayCounterWatchFaceView extends Ui.WatchFace {
+    [ @file = "/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc"; @line = 34; ]
+    <init> {
+    }
+    [ @file = "/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc"; @line = 34; ]
+    static
+    <init> {
+    }
+    [ @file = "/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc"; @line = 36; @position = 16; @symbol_vardef = [leftHalfGraphic,36,16,31]; ]
+    private
+    var leftHalfGraphic;
+    [ @file = "/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc"; @line = 37; @position = 16; @symbol_vardef = [fontDayCount,37,16,28]; ]
+    private
+    var fontDayCount;
+    [ @file = "/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc"; @line = 38; @position = 16; @symbol_vardef = [fontDataFields,38,16,30]; ]
+    private
+    var fontDataFields;
+    [ @file = "/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc"; @line = 39; @position = 16; @symbol_vardef = [screenWidth,39,16,27]; ]
+    private
+    var screenWidth;
+    [ @file = "/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc"; @line = 40; @position = 16; @symbol_vardef = [screenHeight,40,16,28]; ]
+    private
+    var screenHeight;
+    //! Constructor
+    [ @file = "/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc"; @line = 43; @symbol_functiondef = [initialize,43,13,23]; ]
+    function initialize() as Void {
+_Users_shaibenjamin_Personal_git_countdays_source_countdaysApp_mc_43_26_45_4_start:
+[ "/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc" 44 8 ]
+        symbol [ WatchFace %tmp.2 44 8 17 ];
+        %tmp.2 = getv ? :WatchFace;
+        symbol [ initialize %tmp.3 44 18 28 ];
+        %tmp.3 = getv function %tmp.2 :initialize;
+        invoke %tmp.2 %tmp.3();
+_Users_shaibenjamin_Personal_git_countdays_source_countdaysApp_mc_43_26_45_4_stop:
+    }
+    //! Load resources at startup.
+    [ @file = "/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc"; @line = 48; @symbol_functiondef = [onLayout,48,13,21]; @symbol_param<0> = [dc,48,22,24]; @symbol_param<0>_type<0> = [Gfx,48,28,31]; @symbol_param<0>_type<1> = [Dc,48,32,34]; ]
+    function onLayout(dc as Gfx.Dc) {
+_Users_shaibenjamin_Personal_git_countdays_source_countdaysApp_mc_48_36_64_4_start:
+[ "/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc" 50 8 ]
+        %tmp.1 = lgetv %dc;
+        symbol [ dc %tmp.1 50 22 24 ];
+        symbol [ getWidth %tmp.2 50 25 33 ];
+        %tmp.2 = getv function %tmp.1 :getWidth;
+        %tmp.3 = invoke %tmp.1 %tmp.2();
+        symbol [ screenWidth ? 50 8 19 ];
+        putv self :screenWidth %tmp.3;
+[ "/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc" 51 8 ]
+        %tmp.4 = lgetv %dc;
+        symbol [ dc %tmp.4 51 23 25 ];
+        symbol [ getHeight %tmp.5 51 26 35 ];
+        %tmp.5 = getv function %tmp.4 :getHeight;
+        %tmp.6 = invoke %tmp.4 %tmp.5();
+        symbol [ screenHeight ? 51 8 20 ];
+        putv self :screenHeight %tmp.6;
+[ "/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc" 58 8 ]
+        symbol [ Ui %tmp.7 58 26 28 ];
+        %tmp.7 = getm $.Toybox.WatchUi;
+        symbol [ loadResource %tmp.8 58 29 41 ];
+        %tmp.8 = getv function %tmp.7 :loadResource;
+        symbol [ Rez %tmp.10 58 42 45 ];
+        %tmp.10 = getv ? :Rez;
+        symbol [ Drawables %tmp.11 58 46 55 ];
+        %tmp.11 = getv %tmp.10 :Drawables;
+        symbol [ yellowRibbonBitmap %tmp.12 58 56 74 ];
+        %tmp.12 = getv %tmp.11 :yellowRibbonBitmap;
+        %tmp.13 = invoke %tmp.7 %tmp.8(%tmp.12);
+        symbol [ leftHalfGraphic ? 58 8 23 ];
+        putv self :leftHalfGraphic %tmp.13;
+[ "/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc" 62 8 ]
+        symbol [ Gfx %tmp.14 62 23 26 ];
+        %tmp.14 = getm $.Toybox.Graphics;
+        symbol [ FONT_LARGE %tmp.15 62 27 37 ];
+        %tmp.15 = getv %tmp.14 :FONT_LARGE;
+        symbol [ fontDayCount ? 62 8 20 ];
+        putv self :fontDayCount %tmp.15;
+[ "/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc" 63 8 ]
+        symbol [ Gfx %tmp.16 63 25 28 ];
+        %tmp.16 = getm $.Toybox.Graphics;
+        symbol [ FONT_TINY %tmp.17 63 29 38 ];
+        %tmp.17 = getv %tmp.16 :FONT_TINY;
+        symbol [ fontDataFields ? 63 8 22 ];
+        putv self :fontDataFields %tmp.17;
+_Users_shaibenjamin_Personal_git_countdays_source_countdaysApp_mc_48_36_64_4_stop:
+    }
+    //! This method is called when the device re-enters an active state.
+    //! In this state, it can update more frequently and show more data.
+    [ @file = "/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc"; @line = 68; @symbol_functiondef = [onEnterSleep,68,13,25]; ]
+    function onEnterSleep() {
+_Users_shaibenjamin_Personal_git_countdays_source_countdaysApp_mc_68_28_71_4_start:
+[ "/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc" 70 8 ]
+        symbol [ Ui %tmp.1 70 8 10 ];
+        %tmp.1 = getm $.Toybox.WatchUi;
+        symbol [ requestUpdate %tmp.2 70 11 24 ];
+        %tmp.2 = getv function %tmp.1 :requestUpdate;
+        invoke %tmp.1 %tmp.2();
+_Users_shaibenjamin_Personal_git_countdays_source_countdaysApp_mc_68_28_71_4_stop:
+    }
+    //! This method is called when the device exits an active state.
+    //! In this state, it updates less frequently and should use a simple drawing.
+    [ @file = "/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc"; @line = 75; @symbol_functiondef = [onExitSleep,75,13,24]; ]
+    function onExitSleep() {
+_Users_shaibenjamin_Personal_git_countdays_source_countdaysApp_mc_75_27_78_4_start:
+[ "/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc" 77 8 ]
+        symbol [ Ui %tmp.1 77 8 10 ];
+        %tmp.1 = getm $.Toybox.WatchUi;
+        symbol [ requestUpdate %tmp.2 77 11 24 ];
+        %tmp.2 = getv function %tmp.1 :requestUpdate;
+        invoke %tmp.1 %tmp.2();
+_Users_shaibenjamin_Personal_git_countdays_source_countdaysApp_mc_75_27_78_4_stop:
+    }
+    //! This method is called to update the watch face.
+    //! It draws the graphics and data fields on the screen.
+    [ @file = "/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc"; @line = 82; @symbol_functiondef = [onUpdate,82,13,21]; @symbol_param<0> = [dc,82,22,24]; ]
+    function onUpdate(dc) {
+_Users_shaibenjamin_Personal_git_countdays_source_countdaysApp_mc_82_26_165_4_start:
+[ "/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc" 84 8 ]
+        %tmp.1 = lgetv %dc;
+        symbol [ dc %tmp.1 84 8 10 ];
+        symbol [ setColor %tmp.2 84 11 19 ];
+        %tmp.2 = getv function %tmp.1 :setColor;
+        symbol [ Gfx %tmp.3 84 20 23 ];
+        %tmp.3 = getm $.Toybox.Graphics;
+        symbol [ COLOR_BLACK %tmp.4 84 24 35 ];
+        %tmp.4 = getv %tmp.3 :COLOR_BLACK;
+        symbol [ Gfx %tmp.5 84 37 40 ];
+        %tmp.5 = getm $.Toybox.Graphics;
+        symbol [ COLOR_BLACK %tmp.6 84 41 52 ];
+        %tmp.6 = getv %tmp.5 :COLOR_BLACK;
+        invoke %tmp.1 %tmp.2(%tmp.4, %tmp.6);
+[ "/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc" 85 8 ]
+        %tmp.7 = lgetv %dc;
+        symbol [ dc %tmp.7 85 8 10 ];
+        symbol [ clear %tmp.8 85 11 16 ];
+        %tmp.8 = getv function %tmp.7 :clear;
+        invoke %tmp.7 %tmp.8();
+[ "/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc" 88 8 ]
+        [ "_Users_shaibenjamin_Personal_git_countdays_source_countdaysApp_mc_82_26_165_4_start" "_Users_shaibenjamin_Personal_git_countdays_source_countdaysApp_mc_82_26_165_4_stop" ]
+        %clockTime.1 = local;
+        symbol [ clockTime %clockTime.1 88 12 21 ];
+        symbol [ Sys %tmp.9 88 24 27 ];
+        %tmp.9 = getm $.Toybox.System;
+        symbol [ getClockTime %tmp.10 88 28 40 ];
+        %tmp.10 = getv function %tmp.9 :getClockTime;
+        %tmp.11 = invoke %tmp.9 %tmp.10();
+        lputv %clockTime.1 %tmp.11;
+        symbol [ clockTime %clockTime.1 88 12 21 ];
+[ "/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc" 93 8 ]
+        [ "_Users_shaibenjamin_Personal_git_countdays_source_countdaysApp_mc_82_26_165_4_start" "_Users_shaibenjamin_Personal_git_countdays_source_countdaysApp_mc_82_26_165_4_stop" ]
+        %oct_7_2023.2 = local;
+        symbol [ oct_7_2023 %oct_7_2023.2 93 12 22 ];
+        symbol [ Time %tmp.14 93 29 33 ];
+        %tmp.14 = getm $.Toybox.Time;
+        symbol [ Moment %tmp.15 93 34 40 ];
+        %tmp.15 = getv function ? %tmp.14 :Moment;
+        %tmp.16 = 1696649340;
+        %tmp.12 = newc %tmp.15 (%tmp.16);
+        lputv %oct_7_2023.2 %tmp.12;
+        symbol [ oct_7_2023 %oct_7_2023.2 93 12 22 ];
+[ "/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc" 95 8 ]
+        [ "_Users_shaibenjamin_Personal_git_countdays_source_countdaysApp_mc_82_26_165_4_start" "_Users_shaibenjamin_Personal_git_countdays_source_countdaysApp_mc_82_26_165_4_stop" ]
+        %today.3 = local;
+        symbol [ today %today.3 95 12 17 ];
+        symbol [ Time %tmp.19 95 24 28 ];
+        %tmp.19 = getm $.Toybox.Time;
+        symbol [ Moment %tmp.20 95 29 35 ];
+        %tmp.20 = getv function ? %tmp.19 :Moment;
+        symbol [ Time %tmp.21 95 36 40 ];
+        %tmp.21 = getm $.Toybox.Time;
+        symbol [ today %tmp.22 95 41 46 ];
+        %tmp.22 = getv function %tmp.21 :today;
+        %tmp.23 = invoke %tmp.21 %tmp.22();
+        symbol [ value %tmp.24 95 49 54 ];
+        %tmp.24 = getv function %tmp.23 :value;
+        %tmp.25 = invoke %tmp.23 %tmp.24();
+        %tmp.17 = newc %tmp.20 (%tmp.25);
+        lputv %today.3 %tmp.17;
+        symbol [ today %today.3 95 12 17 ];
+[ "/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc" 98 8 ]
+        [ "_Users_shaibenjamin_Personal_git_countdays_source_countdaysApp_mc_82_26_165_4_start" "_Users_shaibenjamin_Personal_git_countdays_source_countdaysApp_mc_82_26_165_4_stop" ]
+        %duration.4 = local;
+        symbol [ duration %duration.4 98 12 20 ];
+        %tmp.26 = lgetv %today.3;
+        symbol [ today %tmp.26 98 23 28 ];
+        symbol [ subtract %tmp.27 98 29 37 ];
+        %tmp.27 = getv function %tmp.26 :subtract;
+        %tmp.28 = lgetv %oct_7_2023.2;
+        symbol [ oct_7_2023 %tmp.28 98 38 48 ];
+        %tmp.29 = invoke %tmp.26 %tmp.27(%tmp.28);
+        lputv %duration.4 %tmp.29;
+        symbol [ duration %duration.4 98 12 20 ];
+[ "/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc" 99 8 ]
+        [ "_Users_shaibenjamin_Personal_git_countdays_source_countdaysApp_mc_82_26_165_4_start" "_Users_shaibenjamin_Personal_git_countdays_source_countdaysApp_mc_82_26_165_4_stop" ]
+        %daysPassed.5 = local;
+        symbol [ daysPassed %daysPassed.5 99 12 22 ];
+        %tmp.30 = lgetv %duration.4;
+        symbol [ duration %tmp.30 99 25 33 ];
+        symbol [ value %tmp.31 99 34 39 ];
+        %tmp.31 = getv function %tmp.30 :value;
+        %tmp.32 = invoke %tmp.30 %tmp.31();
+        %tmp.33 = 60;
+        %tmp.34 = 60;
+        %tmp.35 = mul %tmp.33 %tmp.34;
+        %tmp.36 = 24;
+        %tmp.37 = mul %tmp.35 %tmp.36;
+        %tmp.38 = div %tmp.32 %tmp.37;
+        lputv %daysPassed.5 %tmp.38;
+        symbol [ daysPassed %daysPassed.5 99 12 22 ];
+[ "/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc" 102 8 ]
+        [ "_Users_shaibenjamin_Personal_git_countdays_source_countdaysApp_mc_82_26_165_4_start" "_Users_shaibenjamin_Personal_git_countdays_source_countdaysApp_mc_82_26_165_4_stop" ]
+        %graphicWidth.6 = local;
+        symbol [ graphicWidth %graphicWidth.6 102 12 24 ];
+        symbol [ screenWidth %tmp.40 102 27 38 ];
+        %tmp.40 = getv ? :screenWidth;
+        %tmp.41 = 2;
+        %tmp.42 = div %tmp.40 %tmp.41;
+        lputv %graphicWidth.6 %tmp.42;
+        symbol [ graphicWidth %graphicWidth.6 102 12 24 ];
+[ "/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc" 103 8 ]
+        [ "_Users_shaibenjamin_Personal_git_countdays_source_countdaysApp_mc_82_26_165_4_start" "_Users_shaibenjamin_Personal_git_countdays_source_countdaysApp_mc_82_26_165_4_stop" ]
+        %graphicHeight.7 = local;
+        symbol [ graphicHeight %graphicHeight.7 103 12 25 ];
+        symbol [ screenHeight %tmp.44 103 28 40 ];
+        %tmp.44 = getv ? :screenHeight;
+        lputv %graphicHeight.7 %tmp.44;
+        symbol [ graphicHeight %graphicHeight.7 103 12 25 ];
+[ "/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc" 106 8 ]
+_Users_shaibenjamin_Personal_git_countdays_source_countdaysApp_mc_106_8_111_8_if_stmt:
+        symbol [ leftHalfGraphic %tmp.46 106 12 27 ];
+        %tmp.46 = getv ? :leftHalfGraphic;
+        %tmp.47 = null;
+        %tmp.48 = ne %tmp.46 %tmp.47;
+        bf %tmp.48 @_Users_shaibenjamin_Personal_git_countdays_source_countdaysApp_mc_106_8_111_8_if_end;
+_Users_shaibenjamin_Personal_git_countdays_source_countdaysApp_mc_106_8_111_8_if_true:
+_Users_shaibenjamin_Personal_git_countdays_source_countdaysApp_mc_106_37_111_8_start:
+[ "/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc" 108 12 ]
+        [ "_Users_shaibenjamin_Personal_git_countdays_source_countdaysApp_mc_106_37_111_8_start" "_Users_shaibenjamin_Personal_git_countdays_source_countdaysApp_mc_106_37_111_8_stop" ]
+        %graphicX.8 = local;
+        symbol [ graphicX %graphicX.8 108 16 24 ];
+        %tmp.49 = lgetv %graphicWidth.6;
+        symbol [ graphicWidth %tmp.49 108 28 40 ];
+        symbol [ leftHalfGraphic %tmp.51 108 43 58 ];
+        %tmp.51 = getv ? :leftHalfGraphic;
+        %tmp.52 = as %tmp.51 { (!Null) };
+        symbol [ getWidth %tmp.53 108 59 67 ];
+        %tmp.53 = getv function %tmp.52 :getWidth;
+        %tmp.54 = invoke %tmp.52 %tmp.53();
+        %tmp.55 = sub %tmp.49 %tmp.54;
+        %tmp.56 = 2;
+        %tmp.57 = div %tmp.55 %tmp.56;
+        lputv %graphicX.8 %tmp.57;
+        symbol [ graphicX %graphicX.8 108 16 24 ];
+[ "/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc" 109 12 ]
+        [ "_Users_shaibenjamin_Personal_git_countdays_source_countdaysApp_mc_106_37_111_8_start" "_Users_shaibenjamin_Personal_git_countdays_source_countdaysApp_mc_106_37_111_8_stop" ]
+        %graphicY.9 = local;
+        symbol [ graphicY %graphicY.9 109 16 24 ];
+        %tmp.58 = lgetv %graphicHeight.7;
+        symbol [ graphicHeight %tmp.58 109 28 41 ];
+        symbol [ leftHalfGraphic %tmp.60 109 44 59 ];
+        %tmp.60 = getv ? :leftHalfGraphic;
+        symbol [ getHeight %tmp.61 109 60 69 ];
+        %tmp.61 = getv function %tmp.60 :getHeight;
+        %tmp.62 = invoke %tmp.60 %tmp.61();
+        %tmp.63 = sub %tmp.58 %tmp.62;
+        %tmp.64 = 2;
+        %tmp.65 = div %tmp.63 %tmp.64;
+        lputv %graphicY.9 %tmp.65;
+        symbol [ graphicY %graphicY.9 109 16 24 ];
+[ "/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc" 110 12 ]
+        %tmp.66 = lgetv %dc;
+        symbol [ dc %tmp.66 110 12 14 ];
+        symbol [ drawBitmap %tmp.67 110 15 25 ];
+        %tmp.67 = getv function %tmp.66 :drawBitmap;
+        %tmp.68 = lgetv %graphicX.8;
+        symbol [ graphicX %tmp.68 110 26 34 ];
+        %tmp.69 = lgetv %graphicY.9;
+        symbol [ graphicY %tmp.69 110 36 44 ];
+        symbol [ leftHalfGraphic %tmp.71 110 46 61 ];
+        %tmp.71 = getv ? :leftHalfGraphic;
+        invoke %tmp.66 %tmp.67(%tmp.68, %tmp.69, %tmp.71);
+_Users_shaibenjamin_Personal_git_countdays_source_countdaysApp_mc_106_37_111_8_stop:
+        goto @_Users_shaibenjamin_Personal_git_countdays_source_countdaysApp_mc_106_8_111_8_if_end;
+_Users_shaibenjamin_Personal_git_countdays_source_countdaysApp_mc_106_8_111_8_if_end:
+[ "/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc" 114 8 ]
+        [ "_Users_shaibenjamin_Personal_git_countdays_source_countdaysApp_mc_82_26_165_4_start" "_Users_shaibenjamin_Personal_git_countdays_source_countdaysApp_mc_82_26_165_4_stop" ]
+        %dayCountText.10 = local;
+        symbol [ dayCountText %dayCountText.10 114 12 24 ];
+        %tmp.72 = lgetv %daysPassed.5;
+        symbol [ daysPassed %tmp.72 114 27 37 ];
+        symbol [ toString %tmp.73 114 38 46 ];
+        %tmp.73 = getv function %tmp.72 :toString;
+        %tmp.74 = invoke %tmp.72 %tmp.73();
+        lputv %dayCountText.10 %tmp.74;
+        symbol [ dayCountText %dayCountText.10 114 12 24 ];
+[ "/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc" 115 8 ]
+        %tmp.75 = lgetv %dc;
+        symbol [ dc %tmp.75 115 8 10 ];
+        symbol [ setColor %tmp.76 115 11 19 ];
+        %tmp.76 = getv function %tmp.75 :setColor;
+        symbol [ Gfx %tmp.77 115 20 23 ];
+        %tmp.77 = getm $.Toybox.Graphics;
+        symbol [ COLOR_WHITE %tmp.78 115 24 35 ];
+        %tmp.78 = getv %tmp.77 :COLOR_WHITE;
+        symbol [ Gfx %tmp.79 115 37 40 ];
+        %tmp.79 = getm $.Toybox.Graphics;
+        symbol [ COLOR_TRANSPARENT %tmp.80 115 41 58 ];
+        %tmp.80 = getv %tmp.79 :COLOR_TRANSPARENT;
+        invoke %tmp.75 %tmp.76(%tmp.78, %tmp.80);
+[ "/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc" 116 8 ]
+        %tmp.81 = lgetv %dc;
+        symbol [ dc %tmp.81 116 8 10 ];
+        symbol [ drawText %tmp.82 116 11 19 ];
+        %tmp.82 = getv function %tmp.81 :drawText;
+        symbol [ screenWidth %tmp.84 117 12 23 ];
+        %tmp.84 = getv ? :screenWidth;
+        %tmp.85 = 0.75;
+        %tmp.86 = mul %tmp.84 %tmp.85;
+        symbol [ screenHeight %tmp.88 118 12 24 ];
+        %tmp.88 = getv ? :screenHeight;
+        %tmp.89 = 0.5;
+        %tmp.90 = mul %tmp.88 %tmp.89;
+        symbol [ fontDayCount %tmp.92 119 12 24 ];
+        %tmp.92 = getv ? :fontDayCount;
+        %tmp.93 = lgetv %dayCountText.10;
+        symbol [ dayCountText %tmp.93 120 12 24 ];
+        symbol [ Gfx %tmp.94 121 12 15 ];
+        %tmp.94 = getm $.Toybox.Graphics;
+        symbol [ TEXT_JUSTIFY_CENTER %tmp.95 121 16 35 ];
+        %tmp.95 = getv %tmp.94 :TEXT_JUSTIFY_CENTER;
+        symbol [ Gfx %tmp.96 121 38 41 ];
+        %tmp.96 = getm $.Toybox.Graphics;
+        symbol [ TEXT_JUSTIFY_VCENTER %tmp.97 121 42 62 ];
+        %tmp.97 = getv %tmp.96 :TEXT_JUSTIFY_VCENTER;
+        %tmp.98 = bitor %tmp.95 %tmp.97;
+        invoke %tmp.81 %tmp.82(%tmp.86, %tmp.90, %tmp.92, %tmp.93, %tmp.98);
+[ "/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc" 126 8 ]
+        [ "_Users_shaibenjamin_Personal_git_countdays_source_countdaysApp_mc_82_26_165_4_start" "_Users_shaibenjamin_Personal_git_countdays_source_countdaysApp_mc_82_26_165_4_stop" ]
+        %dataY.11 = local;
+        symbol [ dataY %dataY.11 126 12 17 ];
+        symbol [ screenHeight %tmp.100 126 20 32 ];
+        %tmp.100 = getv ? :screenHeight;
+        %tmp.101 = 0.85;
+        %tmp.102 = mul %tmp.100 %tmp.101;
+        lputv %dataY.11 %tmp.102;
+        symbol [ dataY %dataY.11 126 12 17 ];
+[ "/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc" 127 8 ]
+        [ "_Users_shaibenjamin_Personal_git_countdays_source_countdaysApp_mc_82_26_165_4_start" "_Users_shaibenjamin_Personal_git_countdays_source_countdaysApp_mc_82_26_165_4_stop" ]
+        %dataSpacing.12 = local;
+        symbol [ dataSpacing %dataSpacing.12 127 12 23 ];
+        symbol [ screenWidth %tmp.104 127 26 37 ];
+        %tmp.104 = getv ? :screenWidth;
+        %tmp.105 = 3;
+        %tmp.106 = div %tmp.104 %tmp.105;
+        lputv %dataSpacing.12 %tmp.106;
+        symbol [ dataSpacing %dataSpacing.12 127 12 23 ];
+[ "/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc" 130 8 ]
+        [ "_Users_shaibenjamin_Personal_git_countdays_source_countdaysApp_mc_82_26_165_4_start" "_Users_shaibenjamin_Personal_git_countdays_source_countdaysApp_mc_82_26_165_4_stop" ]
+        %dateInfo.13 = local;
+        symbol [ dateInfo %dateInfo.13 130 12 20 ];
+        symbol [ Greg %tmp.107 130 23 27 ];
+        %tmp.107 = getm $.Toybox.Time.Gregorian;
+        symbol [ info %tmp.108 130 28 32 ];
+        %tmp.108 = getv function %tmp.107 :info;
+        symbol [ Time %tmp.109 130 33 37 ];
+        %tmp.109 = getm $.Toybox.Time;
+        symbol [ now %tmp.110 130 38 41 ];
+        %tmp.110 = getv function %tmp.109 :now;
+        %tmp.111 = invoke %tmp.109 %tmp.110();
+        symbol [ Time %tmp.112 130 45 49 ];
+        %tmp.112 = getm $.Toybox.Time;
+        symbol [ FORMAT_MEDIUM %tmp.113 130 50 63 ];
+        %tmp.113 = getv %tmp.112 :FORMAT_MEDIUM;
+        %tmp.114 = invoke %tmp.107 %tmp.108(%tmp.111, %tmp.113);
+        lputv %dateInfo.13 %tmp.114;
+        symbol [ dateInfo %dateInfo.13 130 12 20 ];
+[ "/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc" 131 8 ]
+        [ "_Users_shaibenjamin_Personal_git_countdays_source_countdaysApp_mc_82_26_165_4_start" "_Users_shaibenjamin_Personal_git_countdays_source_countdaysApp_mc_82_26_165_4_stop" ]
+        %dateString.14 = local;
+        symbol [ dateString %dateString.14 131 12 22 ];
+        symbol [ Lang %tmp.116 131 25 29 ];
+        %tmp.116 = getv ? :Lang;
+        symbol [ format %tmp.117 131 30 36 ];
+        %tmp.117 = getv function %tmp.116 :format;
+        %tmp.118 = "$1$ $2$ $3$";
+        %tmp.119 = newa 3;
+        %tmp.120 = lgetv %dateInfo.13;
+        symbol [ dateInfo %tmp.120 131 53 61 ];
+        symbol [ day %tmp.121 131 62 65 ];
+        %tmp.121 = getv %tmp.120 :day;
+        %tmp.122 = dup %tmp.119;
+        %tmp.123 = aputv %tmp.122 0 %tmp.121;
+        %tmp.124 = lgetv %dateInfo.13;
+        symbol [ dateInfo %tmp.124 131 67 75 ];
+        symbol [ month %tmp.125 131 76 81 ];
+        %tmp.125 = getv %tmp.124 :month;
+        %tmp.126 = dup %tmp.123;
+        %tmp.127 = aputv %tmp.126 1 %tmp.125;
+        %tmp.128 = lgetv %dateInfo.13;
+        symbol [ dateInfo %tmp.128 131 83 91 ];
+        symbol [ year %tmp.129 131 92 96 ];
+        %tmp.129 = getv %tmp.128 :year;
+        %tmp.130 = dup %tmp.127;
+        %tmp.131 = aputv %tmp.130 2 %tmp.129;
+        %tmp.132 = invoke %tmp.116 %tmp.117(%tmp.118, %tmp.131);
+        lputv %dateString.14 %tmp.132;
+        symbol [ dateString %dateString.14 131 12 22 ];
+[ "/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc" 132 8 ]
+        %tmp.133 = lgetv %dc;
+        symbol [ dc %tmp.133 132 8 10 ];
+        symbol [ drawText %tmp.134 132 11 19 ];
+        %tmp.134 = getv function %tmp.133 :drawText;
+        %tmp.135 = lgetv %dataSpacing.12;
+        symbol [ dataSpacing %tmp.135 133 12 23 ];
+        %tmp.136 = 0.5;
+        %tmp.137 = mul %tmp.135 %tmp.136;
+        %tmp.138 = lgetv %dataY.11;
+        symbol [ dataY %tmp.138 134 12 17 ];
+        symbol [ fontDataFields %tmp.140 135 12 26 ];
+        %tmp.140 = getv ? :fontDataFields;
+        %tmp.141 = lgetv %dateString.14;
+        symbol [ dateString %tmp.141 136 12 22 ];
+        symbol [ Gfx %tmp.142 137 12 15 ];
+        %tmp.142 = getm $.Toybox.Graphics;
+        symbol [ TEXT_JUSTIFY_CENTER %tmp.143 137 16 35 ];
+        %tmp.143 = getv %tmp.142 :TEXT_JUSTIFY_CENTER;
+        symbol [ Gfx %tmp.144 137 38 41 ];
+        %tmp.144 = getm $.Toybox.Graphics;
+        symbol [ TEXT_JUSTIFY_VCENTER %tmp.145 137 42 62 ];
+        %tmp.145 = getv %tmp.144 :TEXT_JUSTIFY_VCENTER;
+        %tmp.146 = bitor %tmp.143 %tmp.145;
+        invoke %tmp.133 %tmp.134(%tmp.137, %tmp.138, %tmp.140, %tmp.141, %tmp.146);
+[ "/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc" 141 8 ]
+        [ "_Users_shaibenjamin_Personal_git_countdays_source_countdaysApp_mc_82_26_165_4_start" "_Users_shaibenjamin_Personal_git_countdays_source_countdaysApp_mc_82_26_165_4_stop" ]
+        %hr.15 = local;
+        symbol [ hr %hr.15 141 12 14 ];
+        %tmp.147 = "HR: --";
+        lputv %hr.15 %tmp.147;
+        symbol [ hr %hr.15 141 12 14 ];
+[ "/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc" 142 8 ]
+        [ "_Users_shaibenjamin_Personal_git_countdays_source_countdaysApp_mc_82_26_165_4_start" "_Users_shaibenjamin_Personal_git_countdays_source_countdaysApp_mc_82_26_165_4_stop" ]
+        %hrIterator.16 = local;
+        symbol [ hrIterator %hrIterator.16 142 12 22 ];
+        symbol [ Am %tmp.148 142 25 27 ];
+        %tmp.148 = getm $.Toybox.ActivityMonitor;
+        symbol [ getHeartRateHistory %tmp.149 142 28 47 ];
+        %tmp.149 = getv function %tmp.148 :getHeartRateHistory;
+        %tmp.150 = 1;
+        %tmp.151 = true;
+        %tmp.152 = invoke %tmp.148 %tmp.149(%tmp.150, %tmp.151);
+        lputv %hrIterator.16 %tmp.152;
+        symbol [ hrIterator %hrIterator.16 142 12 22 ];
+[ "/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc" 143 8 ]
+        [ "_Users_shaibenjamin_Personal_git_countdays_source_countdaysApp_mc_82_26_165_4_start" "_Users_shaibenjamin_Personal_git_countdays_source_countdaysApp_mc_82_26_165_4_stop" ]
+        %hrSample.17 = local;
+        symbol [ hrSample %hrSample.17 143 12 20 ];
+        %tmp.153 = lgetv %hrIterator.16;
+        symbol [ hrIterator %tmp.153 143 23 33 ];
+        symbol [ next %tmp.154 143 34 38 ];
+        %tmp.154 = getv function %tmp.153 :next;
+        %tmp.155 = invoke %tmp.153 %tmp.154();
+        lputv %hrSample.17 %tmp.155;
+        symbol [ hrSample %hrSample.17 143 12 20 ];
+[ "/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc" 144 8 ]
+_Users_shaibenjamin_Personal_git_countdays_source_countdaysApp_mc_144_8_146_8_if_stmt:
+_Users_shaibenjamin_Personal_git_countdays_source_countdaysApp_mc_144_12_144_83_begin:
+_Users_shaibenjamin_Personal_git_countdays_source_countdaysApp_mc_144_12_144_54_begin:
+        %tmp.156 = lgetv %hrSample.17;
+        symbol [ hrSample %tmp.156 144 12 20 ];
+        %tmp.157 = null;
+        %tmp.158 = ne %tmp.156 %tmp.157;
+        bf %tmp.158 @_Users_shaibenjamin_Personal_git_countdays_source_countdaysApp_mc_144_8_146_8_if_end;
+_Users_shaibenjamin_Personal_git_countdays_source_countdaysApp_mc_144_32_144_54_true:
+        %tmp.159 = lgetv %hrSample.17;
+        symbol [ hrSample %tmp.159 144 32 40 ];
+        %tmp.160 = as %tmp.159 { (!Null) };
+        symbol [ heartRate %tmp.161 144 41 50 ];
+        %tmp.161 = getv %tmp.160 :heartRate;
+        %tmp.162 = null;
+        %tmp.163 = ne %tmp.161 %tmp.162;
+        push %tmp.163;
+_Users_shaibenjamin_Personal_git_countdays_source_countdaysApp_mc_144_32_144_54_end:
+        %tmp.164 = phi [%tmp.158 @_Users_shaibenjamin_Personal_git_countdays_source_countdaysApp_mc_144_12_144_54_begin] [%tmp.163 @_Users_shaibenjamin_Personal_git_countdays_source_countdaysApp_mc_144_32_144_54_true] [%tmp.164 @_Users_shaibenjamin_Personal_git_countdays_source_countdaysApp_mc_144_32_144_54_end];
+        bf %tmp.164 @_Users_shaibenjamin_Personal_git_countdays_source_countdaysApp_mc_144_8_146_8_if_end;
+_Users_shaibenjamin_Personal_git_countdays_source_countdaysApp_mc_144_62_144_83_true:
+        %tmp.165 = lgetv %hrSample.17;
+        symbol [ hrSample %tmp.165 144 62 70 ];
+        %tmp.166 = as %tmp.165 { (!Null) };
+        symbol [ heartRate %tmp.167 144 71 80 ];
+        %tmp.167 = getv %tmp.166 :heartRate;
+        %tmp.168 = 0;
+        %tmp.169 = gt %tmp.167 %tmp.168;
+        push %tmp.169;
+_Users_shaibenjamin_Personal_git_countdays_source_countdaysApp_mc_144_62_144_83_end:
+        %tmp.170 = phi [%tmp.164 @_Users_shaibenjamin_Personal_git_countdays_source_countdaysApp_mc_144_12_144_83_begin] [%tmp.169 @_Users_shaibenjamin_Personal_git_countdays_source_countdaysApp_mc_144_62_144_83_true] [%tmp.170 @_Users_shaibenjamin_Personal_git_countdays_source_countdaysApp_mc_144_62_144_83_end];
+        bf %tmp.170 @_Users_shaibenjamin_Personal_git_countdays_source_countdaysApp_mc_144_8_146_8_if_end;
+_Users_shaibenjamin_Personal_git_countdays_source_countdaysApp_mc_144_8_146_8_if_true:
+_Users_shaibenjamin_Personal_git_countdays_source_countdaysApp_mc_144_86_146_8_start:
+[ "/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc" 145 12 ]
+        %tmp.171 = "HR: ";
+        %tmp.172 = lgetv %hrSample.17;
+        symbol [ hrSample %tmp.172 145 26 34 ];
+        %tmp.173 = as %tmp.172 { (!Null) };
+        symbol [ heartRate %tmp.174 145 35 44 ];
+        %tmp.174 = getv %tmp.173 :heartRate;
+        symbol [ toString %tmp.175 145 45 53 ];
+        %tmp.175 = getv function %tmp.174 :toString;
+        %tmp.176 = invoke %tmp.174 %tmp.175();
+        %tmp.177 = add %tmp.171 %tmp.176;
+        lputv %hr.15 %tmp.177;
+        symbol [ hr %hr.15 145 12 14 ];
+_Users_shaibenjamin_Personal_git_countdays_source_countdaysApp_mc_144_86_146_8_stop:
+        goto @_Users_shaibenjamin_Personal_git_countdays_source_countdaysApp_mc_144_8_146_8_if_end;
+_Users_shaibenjamin_Personal_git_countdays_source_countdaysApp_mc_144_8_146_8_if_end:
+[ "/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc" 147 8 ]
+        %tmp.178 = lgetv %dc;
+        symbol [ dc %tmp.178 147 8 10 ];
+        symbol [ drawText %tmp.179 147 11 19 ];
+        %tmp.179 = getv function %tmp.178 :drawText;
+        %tmp.180 = lgetv %dataSpacing.12;
+        symbol [ dataSpacing %tmp.180 148 12 23 ];
+        %tmp.181 = 1.5;
+        %tmp.182 = mul %tmp.180 %tmp.181;
+        %tmp.183 = lgetv %dataY.11;
+        symbol [ dataY %tmp.183 149 12 17 ];
+        symbol [ fontDataFields %tmp.185 150 12 26 ];
+        %tmp.185 = getv ? :fontDataFields;
+        %tmp.186 = lgetv %hr.15;
+        symbol [ hr %tmp.186 151 12 14 ];
+        symbol [ Gfx %tmp.187 152 12 15 ];
+        %tmp.187 = getm $.Toybox.Graphics;
+        symbol [ TEXT_JUSTIFY_CENTER %tmp.188 152 16 35 ];
+        %tmp.188 = getv %tmp.187 :TEXT_JUSTIFY_CENTER;
+        symbol [ Gfx %tmp.189 152 38 41 ];
+        %tmp.189 = getm $.Toybox.Graphics;
+        symbol [ TEXT_JUSTIFY_VCENTER %tmp.190 152 42 62 ];
+        %tmp.190 = getv %tmp.189 :TEXT_JUSTIFY_VCENTER;
+        %tmp.191 = bitor %tmp.188 %tmp.190;
+        invoke %tmp.178 %tmp.179(%tmp.182, %tmp.183, %tmp.185, %tmp.186, %tmp.191);
+[ "/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc" 156 8 ]
+        [ "_Users_shaibenjamin_Personal_git_countdays_source_countdaysApp_mc_82_26_165_4_start" "_Users_shaibenjamin_Personal_git_countdays_source_countdaysApp_mc_82_26_165_4_stop" ]
+        %stats.18 = local;
+        symbol [ stats %stats.18 156 12 17 ];
+        symbol [ Sys %tmp.192 156 20 23 ];
+        %tmp.192 = getm $.Toybox.System;
+        symbol [ getSystemStats %tmp.193 156 24 38 ];
+        %tmp.193 = getv function %tmp.192 :getSystemStats;
+        %tmp.194 = invoke %tmp.192 %tmp.193();
+        lputv %stats.18 %tmp.194;
+        symbol [ stats %stats.18 156 12 17 ];
+[ "/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc" 157 8 ]
+        [ "_Users_shaibenjamin_Personal_git_countdays_source_countdaysApp_mc_82_26_165_4_start" "_Users_shaibenjamin_Personal_git_countdays_source_countdaysApp_mc_82_26_165_4_stop" ]
+        %battery.19 = local;
+        symbol [ battery %battery.19 157 12 19 ];
+        %tmp.195 = "Bat: ";
+        %tmp.196 = lgetv %stats.18;
+        symbol [ stats %tmp.196 157 32 37 ];
+        symbol [ battery %tmp.197 157 38 45 ];
+        %tmp.197 = getv %tmp.196 :battery;
+        symbol [ toNumber %tmp.198 157 46 54 ];
+        %tmp.198 = getv function %tmp.197 :toNumber;
+        %tmp.199 = invoke %tmp.197 %tmp.198();
+        symbol [ toString %tmp.200 157 57 65 ];
+        %tmp.200 = getv function %tmp.199 :toString;
+        %tmp.201 = invoke %tmp.199 %tmp.200();
+        %tmp.202 = add %tmp.195 %tmp.201;
+        %tmp.203 = "%";
+        %tmp.204 = add %tmp.202 %tmp.203;
+        lputv %battery.19 %tmp.204;
+        symbol [ battery %battery.19 157 12 19 ];
+[ "/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc" 158 8 ]
+        %tmp.205 = lgetv %dc;
+        symbol [ dc %tmp.205 158 8 10 ];
+        symbol [ drawText %tmp.206 158 11 19 ];
+        %tmp.206 = getv function %tmp.205 :drawText;
+        %tmp.207 = lgetv %dataSpacing.12;
+        symbol [ dataSpacing %tmp.207 159 12 23 ];
+        %tmp.208 = 2.5;
+        %tmp.209 = mul %tmp.207 %tmp.208;
+        %tmp.210 = lgetv %dataY.11;
+        symbol [ dataY %tmp.210 160 12 17 ];
+        symbol [ fontDataFields %tmp.212 161 12 26 ];
+        %tmp.212 = getv ? :fontDataFields;
+        %tmp.213 = lgetv %battery.19;
+        symbol [ battery %tmp.213 162 12 19 ];
+        symbol [ Gfx %tmp.214 163 12 15 ];
+        %tmp.214 = getm $.Toybox.Graphics;
+        symbol [ TEXT_JUSTIFY_CENTER %tmp.215 163 16 35 ];
+        %tmp.215 = getv %tmp.214 :TEXT_JUSTIFY_CENTER;
+        symbol [ Gfx %tmp.216 163 38 41 ];
+        %tmp.216 = getm $.Toybox.Graphics;
+        symbol [ TEXT_JUSTIFY_VCENTER %tmp.217 163 42 62 ];
+        %tmp.217 = getv %tmp.216 :TEXT_JUSTIFY_VCENTER;
+        %tmp.218 = bitor %tmp.215 %tmp.217;
+        invoke %tmp.205 %tmp.206(%tmp.209, %tmp.210, %tmp.212, %tmp.213, %tmp.218);
+_Users_shaibenjamin_Personal_git_countdays_source_countdaysApp_mc_82_26_165_4_stop:
+    }
+}
+[ @file = "/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc"; @line = 4; ]
+<init> {
+}

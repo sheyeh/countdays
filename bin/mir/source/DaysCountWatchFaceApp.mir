@@ -1,0 +1,45 @@
+[ @file = "/Users/shaibenjamin/Personal/git/countdays/countdays/source/DaysCountWatchFaceApp.mc"; @line = 4; @symbol_usingdef<0> = [Toybox,4,6,12]; @symbol_usingdef<1> = [Application,4,13,24]; @symbol_usingAlias = [App,4,28,31]; ]
+using Toybox.Application as :App;
+[ @file = "/Users/shaibenjamin/Personal/git/countdays/countdays/source/DaysCountWatchFaceApp.mc"; @line = 5; @symbol_usingdef<0> = [Toybox,5,6,12]; @symbol_usingdef<1> = [WatchUi,5,13,20]; @symbol_usingAlias = [Ui,5,24,26]; ]
+using Toybox.WatchUi as :Ui;
+//! The main application class
+[ @file = "/Users/shaibenjamin/Personal/git/countdays/countdays/source/DaysCountWatchFaceApp.mc"; @line = 8; @symbol_classdef = [DayCounterWatchFaceApp,8,6,28]; @symbol_extends<0> = [App,8,37,40]; @symbol_extends<1> = [AppBase,8,41,48]; ]
+class DayCounterWatchFaceApp extends App.AppBase {
+    [ @file = "/Users/shaibenjamin/Personal/git/countdays/countdays/source/DaysCountWatchFaceApp.mc"; @line = 8; ]
+    <init> {
+    }
+    [ @file = "/Users/shaibenjamin/Personal/git/countdays/countdays/source/DaysCountWatchFaceApp.mc"; @line = 8; ]
+    static
+    <init> {
+    }
+    //! Constructor
+    [ @file = "/Users/shaibenjamin/Personal/git/countdays/countdays/source/DaysCountWatchFaceApp.mc"; @line = 11; @symbol_functiondef = [initialize,11,13,23]; ]
+    function initialize() as Void {
+_Users_shaibenjamin_Personal_git_countdays_countdays_source_DaysCountWatchFaceApp_mc_11_26_13_4_start:
+[ "/Users/shaibenjamin/Personal/git/countdays/countdays/source/DaysCountWatchFaceApp.mc" 12 8 ]
+        symbol [ AppBase %tmp.2 12 8 15 ];
+        %tmp.2 = getv ? :AppBase;
+        symbol [ initialize %tmp.3 12 16 26 ];
+        %tmp.3 = getv function %tmp.2 :initialize;
+        invoke %tmp.2 %tmp.3();
+_Users_shaibenjamin_Personal_git_countdays_countdays_source_DaysCountWatchFaceApp_mc_11_26_13_4_stop:
+    }
+    //! On app startup, create the initial view
+    //! @return Array of View and InputDelegate
+    [ @file = "/Users/shaibenjamin/Personal/git/countdays/countdays/source/DaysCountWatchFaceApp.mc"; @line = 17; @symbol_functiondef = [getInitialView,17,13,27]; ]
+    function getInitialView() {
+_Users_shaibenjamin_Personal_git_countdays_countdays_source_DaysCountWatchFaceApp_mc_17_30_19_4_start:
+[ "/Users/shaibenjamin/Personal/git/countdays/countdays/source/DaysCountWatchFaceApp.mc" 18 8 ]
+        %tmp.1 = newa 1;
+        symbol [ DayCounterWatchFaceView %tmp.5 18 21 44 ];
+        %tmp.5 = getv ? :DayCounterWatchFaceView;
+        %tmp.2 = newc %tmp.5 ();
+        %tmp.6 = dup %tmp.1;
+        %tmp.7 = aputv %tmp.6 0 %tmp.2;
+        ret %tmp.7;
+_Users_shaibenjamin_Personal_git_countdays_countdays_source_DaysCountWatchFaceApp_mc_17_30_19_4_stop:
+    }
+}
+[ @file = "/Users/shaibenjamin/Personal/git/countdays/countdays/source/DaysCountWatchFaceApp.mc"; @line = 4; ]
+<init> {
+}
