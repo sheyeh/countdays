@@ -81,7 +81,7 @@ class DayCounterWatchFaceView extends Ui.WatchFace {
         dc.clear();
 
         // --- Calculate days passed since October 7, 2023 ---
-        // Define the start date (October 7, 2023)
+        // Start date (October 7, 2023)  in seconds since epoch
         var oct_7_2023 = new Time.Moment(1696649340);
         // Get the current date
         var today = new Time.Moment(Time.today().value());
@@ -92,29 +92,23 @@ class DayCounterWatchFaceView extends Ui.WatchFace {
 
         // --- Draw the graphics and day count ---
 
-        // Draw the custom graphic on the left half
+        // Draw the custom graphic
         if (yellowRibbon != null) {
-            // The graphic is centered vertically in the left half
-            var graphicX = screenWidth * 0.1;
-            var graphicY = screenHeight * 0.1;
-            var graphicWidth = screenWidth * 0.6;
-            var graphicHeight = screenHeight * 0.8;
             dc.drawScaledBitmap(
-                graphicX, // X position
-                graphicY, // Y position
-                graphicWidth, // Width to scale to
-                graphicHeight, // Height to scale to
+                0, // X position
+                0, // Y position
+                screenWidth, // Width to scale to
+                screenWidth, // Height to scale to
                 yellowRibbon // Bitmap to draw
             );
-            // dc.drawBitmap(graphicX, graphicY, yellowRibbon);
         }
 
         // Draw the day count on the right half
         var dayCountText = daysPassed.toString();
-        dc.setColor(Gfx.COLOR_WHITE, Gfx.COLOR_TRANSPARENT);
+        dc.setColor(0xFFCC00, Gfx.COLOR_TRANSPARENT);
         dc.drawText(
-            screenWidth * 0.75, // Center the text in the right half
-            screenHeight * 0.5, // Center the text vertically
+            screenWidth * 0.5, // Center the text horizontally
+            screenHeight * 0.2, // Top part of the screen
             fontDayCount,
             dayCountText,
             Gfx.TEXT_JUSTIFY_CENTER | Gfx.TEXT_JUSTIFY_VCENTER

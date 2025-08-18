@@ -29,31 +29,27 @@
 <entry filename="/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc" id="10" lineNum="90" parent="globals/DayCounterWatchFaceView" pc="268435769" symbol="onUpdate"/>
 <entry filename="/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc" id="10" lineNum="91" parent="globals/DayCounterWatchFaceView" pc="268435782" symbol="onUpdate"/>
 <entry filename="/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc" id="10" lineNum="96" parent="globals/DayCounterWatchFaceView" pc="268435796" symbol="onUpdate"/>
-<entry filename="/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc" id="10" lineNum="98" parent="globals/DayCounterWatchFaceView" pc="268435805" symbol="onUpdate"/>
-<entry filename="/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc" id="10" lineNum="99" parent="globals/DayCounterWatchFaceView" pc="268435818" symbol="onUpdate"/>
-<entry filename="/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc" id="10" lineNum="100" parent="globals/DayCounterWatchFaceView" pc="268435831" symbol="onUpdate"/>
-<entry filename="/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc" id="10" lineNum="101" parent="globals/DayCounterWatchFaceView" pc="268435844" symbol="onUpdate"/>
-<entry filename="/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc" id="10" lineNum="102" parent="globals/DayCounterWatchFaceView" pc="268435857" symbol="onUpdate"/>
-<entry filename="/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc" id="10" lineNum="113" parent="globals/DayCounterWatchFaceView" pc="268435883" symbol="onUpdate"/>
-<entry filename="/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc" id="10" lineNum="114" parent="globals/DayCounterWatchFaceView" pc="268435892" symbol="onUpdate"/>
-<entry filename="/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc" id="10" lineNum="115" parent="globals/DayCounterWatchFaceView" pc="268435909" symbol="onUpdate"/>
-<entry filename="/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc" id="10" lineNum="125" parent="globals/DayCounterWatchFaceView" pc="268435950" symbol="onUpdate"/>
-<entry filename="/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc" id="10" lineNum="126" parent="globals/DayCounterWatchFaceView" pc="268435963" symbol="onUpdate"/>
-<entry filename="/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc" id="10" lineNum="129" parent="globals/DayCounterWatchFaceView" pc="268435973" symbol="onUpdate"/>
-<entry filename="/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc" id="10" lineNum="130" parent="globals/DayCounterWatchFaceView" pc="268435999" symbol="onUpdate"/>
-<entry filename="/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc" id="10" lineNum="131" parent="globals/DayCounterWatchFaceView" pc="268436049" symbol="onUpdate"/>
-<entry filename="/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc" id="10" lineNum="140" parent="globals/DayCounterWatchFaceView" pc="268436078" symbol="onUpdate"/>
-<entry filename="/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc" id="10" lineNum="141" parent="globals/DayCounterWatchFaceView" pc="268436085" symbol="onUpdate"/>
-<entry filename="/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc" id="10" lineNum="142" parent="globals/DayCounterWatchFaceView" pc="268436102" symbol="onUpdate"/>
-<entry filename="/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc" id="10" lineNum="143" parent="globals/DayCounterWatchFaceView" pc="268436111" symbol="onUpdate"/>
-<entry filename="/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc" id="10" lineNum="144" parent="globals/DayCounterWatchFaceView" pc="268436140" symbol="onUpdate"/>
-<entry filename="/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc" id="10" lineNum="146" parent="globals/DayCounterWatchFaceView" pc="268436164" symbol="onUpdate"/>
-<entry filename="/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc" id="10" lineNum="155" parent="globals/DayCounterWatchFaceView" pc="268436193" symbol="onUpdate"/>
-<entry filename="/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc" id="10" lineNum="156" parent="globals/DayCounterWatchFaceView" pc="268436205" symbol="onUpdate"/>
-<entry filename="/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc" id="10" lineNum="157" parent="globals/DayCounterWatchFaceView" pc="268436237" symbol="onUpdate"/>
-<entry filename="/Users/shaibenjamin/Personal/git/countdays/bin/gen/006-B4260-00/source/Rez.mcgen" id="11" lineNum="14" parent="globals/Rez/Layouts" pc="268436267" symbol="WatchFace"/>
-<entry filename="/Users/shaibenjamin/Personal/git/countdays/bin/gen/006-B4260-00/source/Rez.mcgen" id="11" lineNum="15" parent="globals/Rez/Layouts" pc="268436278" symbol="WatchFace"/>
-<entry filename="/Users/shaibenjamin/Personal/git/countdays/bin/gen/006-B4260-00/source/Rez.mcgen" id="11" lineNum="17" parent="globals/Rez/Layouts" pc="268436382" symbol="WatchFace"/>
+<entry filename="/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc" id="10" lineNum="97" parent="globals/DayCounterWatchFaceView" pc="268435805" symbol="onUpdate"/>
+<entry filename="/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc" id="10" lineNum="107" parent="globals/DayCounterWatchFaceView" pc="268435835" symbol="onUpdate"/>
+<entry filename="/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc" id="10" lineNum="108" parent="globals/DayCounterWatchFaceView" pc="268435844" symbol="onUpdate"/>
+<entry filename="/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc" id="10" lineNum="109" parent="globals/DayCounterWatchFaceView" pc="268435861" symbol="onUpdate"/>
+<entry filename="/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc" id="10" lineNum="119" parent="globals/DayCounterWatchFaceView" pc="268435902" symbol="onUpdate"/>
+<entry filename="/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc" id="10" lineNum="120" parent="globals/DayCounterWatchFaceView" pc="268435915" symbol="onUpdate"/>
+<entry filename="/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc" id="10" lineNum="123" parent="globals/DayCounterWatchFaceView" pc="268435925" symbol="onUpdate"/>
+<entry filename="/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc" id="10" lineNum="124" parent="globals/DayCounterWatchFaceView" pc="268435951" symbol="onUpdate"/>
+<entry filename="/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc" id="10" lineNum="125" parent="globals/DayCounterWatchFaceView" pc="268436001" symbol="onUpdate"/>
+<entry filename="/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc" id="10" lineNum="134" parent="globals/DayCounterWatchFaceView" pc="268436030" symbol="onUpdate"/>
+<entry filename="/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc" id="10" lineNum="135" parent="globals/DayCounterWatchFaceView" pc="268436037" symbol="onUpdate"/>
+<entry filename="/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc" id="10" lineNum="136" parent="globals/DayCounterWatchFaceView" pc="268436054" symbol="onUpdate"/>
+<entry filename="/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc" id="10" lineNum="137" parent="globals/DayCounterWatchFaceView" pc="268436063" symbol="onUpdate"/>
+<entry filename="/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc" id="10" lineNum="138" parent="globals/DayCounterWatchFaceView" pc="268436092" symbol="onUpdate"/>
+<entry filename="/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc" id="10" lineNum="140" parent="globals/DayCounterWatchFaceView" pc="268436116" symbol="onUpdate"/>
+<entry filename="/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc" id="10" lineNum="149" parent="globals/DayCounterWatchFaceView" pc="268436145" symbol="onUpdate"/>
+<entry filename="/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc" id="10" lineNum="150" parent="globals/DayCounterWatchFaceView" pc="268436157" symbol="onUpdate"/>
+<entry filename="/Users/shaibenjamin/Personal/git/countdays/source/countdaysApp.mc" id="10" lineNum="151" parent="globals/DayCounterWatchFaceView" pc="268436189" symbol="onUpdate"/>
+<entry filename="/Users/shaibenjamin/Personal/git/countdays/bin/gen/006-B4260-00/source/Rez.mcgen" id="11" lineNum="14" parent="globals/Rez/Layouts" pc="268436219" symbol="WatchFace"/>
+<entry filename="/Users/shaibenjamin/Personal/git/countdays/bin/gen/006-B4260-00/source/Rez.mcgen" id="11" lineNum="15" parent="globals/Rez/Layouts" pc="268436230" symbol="WatchFace"/>
+<entry filename="/Users/shaibenjamin/Personal/git/countdays/bin/gen/006-B4260-00/source/Rez.mcgen" id="11" lineNum="17" parent="globals/Rez/Layouts" pc="268436334" symbol="WatchFace"/>
 </pcToLineNum>
 <symbolTable>
 <entry id="8388639" module="true" symbol="Graphics"/>
@@ -99,27 +95,23 @@
 </symbolTable>
 <localVars>
 <entry arg="true" endPc="268435647" name="dc" stackId="1" startPc="268435561"/>
-<entry arg="true" endPc="268436266" name="dc" stackId="1" startPc="268435677"/>
-<entry endPc="268436265" name="oct_7_2023" stackId="2" startPc="268435680"/>
-<entry endPc="268436265" name="today" stackId="3" startPc="268435680"/>
-<entry endPc="268436265" name="duration" stackId="4" startPc="268435680"/>
-<entry endPc="268436265" name="daysPassed" stackId="5" startPc="268435680"/>
-<entry endPc="268435879" name="graphicX" stackId="6" startPc="268435805"/>
-<entry endPc="268435879" name="graphicY" stackId="7" startPc="268435805"/>
-<entry endPc="268435879" name="graphicWidth" stackId="8" startPc="268435805"/>
-<entry endPc="268435879" name="graphicHeight" stackId="9" startPc="268435805"/>
-<entry endPc="268436265" name="dayCountText" stackId="10" startPc="268435680"/>
-<entry endPc="268436265" name="dataY" stackId="11" startPc="268435680"/>
-<entry endPc="268436265" name="dataSpacing" stackId="12" startPc="268435680"/>
-<entry endPc="268436265" name="dateInfo" stackId="13" startPc="268435680"/>
-<entry endPc="268436265" name="dateString" stackId="14" startPc="268435680"/>
-<entry endPc="268436265" name="hr" stackId="15" startPc="268435680"/>
-<entry endPc="268436265" name="hrIterator" stackId="16" startPc="268435680"/>
-<entry endPc="268436265" name="hrSample" stackId="17" startPc="268435680"/>
-<entry endPc="268436265" name="stats" stackId="18" startPc="268435680"/>
-<entry endPc="268436265" name="battery" stackId="19" startPc="268435680"/>
-<entry arg="true" endPc="268436391" name="dc" stackId="1" startPc="268436267"/>
-<entry endPc="268436391" name="rez_cmp_local_text_TimeLabel" stackId="2" startPc="268436278"/>
+<entry arg="true" endPc="268436218" name="dc" stackId="1" startPc="268435677"/>
+<entry endPc="268436217" name="oct_7_2023" stackId="2" startPc="268435680"/>
+<entry endPc="268436217" name="today" stackId="3" startPc="268435680"/>
+<entry endPc="268436217" name="duration" stackId="4" startPc="268435680"/>
+<entry endPc="268436217" name="daysPassed" stackId="5" startPc="268435680"/>
+<entry endPc="268436217" name="dayCountText" stackId="6" startPc="268435680"/>
+<entry endPc="268436217" name="dataY" stackId="7" startPc="268435680"/>
+<entry endPc="268436217" name="dataSpacing" stackId="8" startPc="268435680"/>
+<entry endPc="268436217" name="dateInfo" stackId="9" startPc="268435680"/>
+<entry endPc="268436217" name="dateString" stackId="10" startPc="268435680"/>
+<entry endPc="268436217" name="hr" stackId="11" startPc="268435680"/>
+<entry endPc="268436217" name="hrIterator" stackId="12" startPc="268435680"/>
+<entry endPc="268436217" name="hrSample" stackId="13" startPc="268435680"/>
+<entry endPc="268436217" name="stats" stackId="14" startPc="268435680"/>
+<entry endPc="268436217" name="battery" stackId="15" startPc="268435680"/>
+<entry arg="true" endPc="268436343" name="dc" stackId="1" startPc="268436219"/>
+<entry endPc="268436343" name="rez_cmp_local_text_TimeLabel" stackId="2" startPc="268436230"/>
 </localVars>
 <deviceInfo deviceVersion="7b60046ebc6cbbbfd1a31636a2da0520945bb7b1" partNumber="006-B4260-00"/>
 <annotations>
@@ -174,11 +166,11 @@
 <functionEntry accessMode="public" endPc="268435676" name="initialize" parent="DayCounterWatchFaceView" startPc="268435662">
 <documentation><![CDATA[<div class="description"> Constructor<br/></div>]]></documentation>
 </functionEntry>
-<functionEntry accessMode="public" endPc="268436266" name="onUpdate" parent="DayCounterWatchFaceView" startPc="268435677">
+<functionEntry accessMode="public" endPc="268436218" name="onUpdate" parent="DayCounterWatchFaceView" startPc="268435677">
 <param id="dc"/>
 <documentation><![CDATA[<div class="description"> This method is called to update the watch face.<br/> It draws the graphics and data fields on the screen.<br/></div>]]></documentation>
 </functionEntry>
-<functionEntry accessMode="public" endPc="268436391" name="WatchFace" parent="Layouts" startPc="268436267">
+<functionEntry accessMode="public" endPc="268436343" name="WatchFace" parent="Layouts" startPc="268436219">
 <param id="dc"/>
 <documentation/>
 </functionEntry>
