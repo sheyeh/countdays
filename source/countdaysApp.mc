@@ -34,8 +34,6 @@ using Toybox.Sensor as Sensor;
 class DayCounterWatchFaceView extends Ui.WatchFace {
 
     private var yellowRibbon;
-    private var fontDayCount;
-    private var fontDataFields;
     private var screenWidth;
     private var screenHeight;
 
@@ -55,8 +53,7 @@ class DayCounterWatchFaceView extends Ui.WatchFace {
 
         // Load fonts for the data fields. You can create custom fonts if desired.
         // fontDayCount = Ui.loadResource(Rez.Fonts.DayCountFont);
-        fontDayCount = Gfx.FONT_LARGE;
-        fontDataFields = Gfx.FONT_TINY;
+
     }
 
     //! This method is called when the device re-enters an active state.
@@ -98,10 +95,6 @@ class DayCounterWatchFaceView extends Ui.WatchFace {
         dc.setColor(Gfx.COLOR_BLACK, Gfx.COLOR_BLACK);
         dc.clear();
 
-        var daysPassed = daysSinceOct7();
-
-        // --- Draw the graphics and day count ---
-
         // Draw the custom graphic
         if (yellowRibbon != null) {
             dc.drawScaledBitmap(
@@ -113,57 +106,86 @@ class DayCounterWatchFaceView extends Ui.WatchFace {
             );
         }
 
-        // Draw the day count on the right half
-        var dayCountText = daysPassed.toString();
+        var dayCountText = daysSinceOct7().toString();
         dc.setColor(0xFFCC00, Gfx.COLOR_TRANSPARENT);
         dc.drawText(
             screenWidth * 0.5, // Center the text horizontally
             screenHeight * 0.2, // Top part of the screen
-            fontDayCount,
+            Gfx.FONT_LARGE,
             dayCountText,
             Gfx.TEXT_JUSTIFY_CENTER | Gfx.TEXT_JUSTIFY_VCENTER
         );
 
         // --- Draw the data fields (date, heart rate, battery) ---
-        // Position them in a row at the bottom of the screen
-        var dataY = screenHeight * 0.85;
-        var dataSpacing = screenWidth / 3;
-
         // Draw the date
-        var dateInfo = Greg.info(Time.now(), Time.FORMAT_MEDIUM);
-        var dateString = Lang.format("$1$ $2$ $3$", [dateInfo.day, dateInfo.month, dateInfo.year]);
-        dc.drawText(
-            dataSpacing * 0.5,
-            dataY,
-            fontDataFields,
-            dateString,
-            Gfx.TEXT_JUSTIFY_CENTER | Gfx.TEXT_JUSTIFY_VCENTER
-        );
 
-        // Draw the heart rate
-        var hr = "HR: --";
-        var hrIterator = Am.getHeartRateHistory(1, true);
-        var hrSample = hrIterator.next();
-        if (hrSample != null && hrSample.heartRate != null && hrSample.heartRate > 0) {
-            hr = "HR: " + hrSample.heartRate.toString();
-        }
-        dc.drawText(
-            dataSpacing * 1.5,
-            dataY,
-            fontDataFields,
-            hr,
-            Gfx.TEXT_JUSTIFY_CENTER | Gfx.TEXT_JUSTIFY_VCENTER
-        );
+        drawBattery(dc);
+        drawHeartRate(dc);
+        drawDate(dc);
 
-        // Draw the battery level
-        var stats = Sys.getSystemStats();
-        var battery = "Bat: " + stats.battery.toNumber().toString() + "%";
-        dc.drawText(
-            dataSpacing * 2.5,
-            dataY,
-            fontDataFields,
-            battery,
-            Gfx.TEXT_JUSTIFY_CENTER | Gfx.TEXT_JUSTIFY_VCENTER
-        );
     }
+
+    function drawDate(dc) {
+        var dateInfo = Greg.info(Time.now(), Time.FORMAT_MEDIUM);
+        var dateString = Lang.format("$1$ $2$ $3$", [dateInfo.day_of_week, dateInfo.month, dateInfo.day]);
+        dc.setColor(Gfx.COLOR_WHITE, Gfx.COLOR_TRANSPARENT);
+        dc.drawText(
+            screenWidth * 0.93, // X position
+            screenHeight / 2, // Y position
+            Gfx.FONT_XTINY,
+            dateString,
+            Gfx.TEXT_JUSTIFY_RIGHT | Gfx.TEXT_JUSTIFY_VCENTER
+        );
+
+    }
+    function drawBattery(dc) {
+        var battery = Sys.getSystemStats().battery;
+        var batteryResource =
+                        battery <= 10 ? Rez.Drawables.battery15 : 
+                        battery < 30 ? Rez.Drawables.battery25 :
+                        battery < 60 ? Rez.Drawables.battery50 :
+                        battery < 85 ? Rez.Drawables.battery75 :
+                        Rez.Drawables.battery100;
+
+        dc.drawScaledBitmap(
+            screenWidth * 0.1 - 40, // X position
+            screenHeight / 2 - 20, // Y position
+            40, // Width to scale to
+            40, // Height to scale to
+            Ui.loadResource(batteryResource) // Bitmap to draw
+        );
+        dc.setColor(
+            battery <= 10 ? Gfx.COLOR_RED : Gfx.COLOR_WHITE, Gfx.COLOR_TRANSPARENT);
+        dc.drawText(
+            screenWidth * 0.1 + 5, // X position
+            screenHeight / 2, // Y position
+            Gfx.FONT_XTINY,
+            format("$1$%", [battery.format("%d")]),
+            Gfx.TEXT_JUSTIFY_LEFT | Gfx.TEXT_JUSTIFY_VCENTER
+        );
+        
+    }
+
+    function drawHeartRate(dc) {
+        var hrSample = Am.getHeartRateHistory(1, true).next();
+        var hr = hrSample !=null ? hrSample.heartRate : 0;
+        if (hr > 0) {
+            dc.drawScaledBitmap(
+                screenWidth * 0.5 - 30, // X position
+                screenHeight * 0.9, // Y position
+                30, // Width to scale to
+                30, // Height to scale to
+                Ui.loadResource(Rez.Drawables.heart) // Bitmap to draw
+            );
+            dc.setColor(Gfx.COLOR_WHITE, Gfx.COLOR_TRANSPARENT);
+            dc.drawText(
+                screenWidth * 0.5 + 5, // X position
+                screenHeight * 0.9, // Y position
+                Gfx.FONT_XTINY,
+                format("$1$", [hr.toString()]),
+                Gfx.TEXT_JUSTIFY_LEFT
+            );
+        }
+    }
+
 }
