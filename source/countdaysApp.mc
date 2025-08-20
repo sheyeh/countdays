@@ -73,6 +73,18 @@ class DayCounterWatchFaceView extends Ui.WatchFace {
         Ui.requestUpdate();
     }
 
+    const oct_7_2023 = new Time.Moment(1696649340); // October 7, 2023 in seconds since epoch
+
+    //! --- Calculate days passed since October 7, 2023 ---
+    function daysSinceOct7() {
+        // Get the current date
+        var today = new Time.Moment(Time.today().value());
+
+        // Calculate the difference in days
+        var duration = today.subtract(oct_7_2023);
+        return duration.value() / (60 * 60 * 24); // Convert seconds to days
+    }
+
     //! This method is called to update the watch face.
     //! It draws the graphics and data fields on the screen.
     function onUpdate(dc) {
@@ -80,15 +92,7 @@ class DayCounterWatchFaceView extends Ui.WatchFace {
         dc.setColor(Gfx.COLOR_BLACK, Gfx.COLOR_BLACK);
         dc.clear();
 
-        // --- Calculate days passed since October 7, 2023 ---
-        // Start date (October 7, 2023)  in seconds since epoch
-        var oct_7_2023 = new Time.Moment(1696649340);
-        // Get the current date
-        var today = new Time.Moment(Time.today().value());
-
-        // Calculate the difference in days
-        var duration = today.subtract(oct_7_2023);
-        var daysPassed = duration.value() / (60 * 60 * 24); // Convert seconds to days
+        var daysPassed = daysSinceOct7();
 
         // --- Draw the graphics and day count ---
 
