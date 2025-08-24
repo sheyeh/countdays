@@ -36,6 +36,8 @@ class DayCounterWatchFaceView extends Ui.WatchFace {
     private var yellowRibbon;
     private var screenWidth;
     private var screenHeight;
+    private var centerX;
+    private var centerY;
 
     //! Constructor
     function initialize() {
@@ -47,6 +49,8 @@ class DayCounterWatchFaceView extends Ui.WatchFace {
         // Get screen dimensions for layout calculations
         screenWidth = dc.getWidth();
         screenHeight = dc.getHeight();
+        centerX = screenWidth / 2;
+        centerY = screenHeight / 2;
 
         // Load the custom graphics.
         yellowRibbon = Ui.loadResource(Rez.Drawables.yellowRibbonBitmap);
@@ -85,7 +89,8 @@ class DayCounterWatchFaceView extends Ui.WatchFace {
         var today = new Time.Moment(Time.today().value());
         // Calculate the difference in days
         var duration = today.subtract(oct_7_2023);
-        return duration.value() / (60 * 60 * 24) + 2; // Convert seconds to days
+        // convert seconds to days, adding 2 to include both start and end dates
+        return duration.value() / (60 * 60 * 24) + 2;
     }
 
     //! This method is called to update the watch face.
@@ -95,7 +100,7 @@ class DayCounterWatchFaceView extends Ui.WatchFace {
         dc.setColor(Gfx.COLOR_BLACK, Gfx.COLOR_BLACK);
         dc.clear();
 
-        // Draw the custom graphic
+        // Draw yellow ribbon as background
         if (yellowRibbon != null) {
             dc.drawScaledBitmap(
                 0, // X position
@@ -107,27 +112,37 @@ class DayCounterWatchFaceView extends Ui.WatchFace {
         }
 
         var dayCountText = daysSinceOct7().toString();
-        dc.setColor(0xFFCC00, Gfx.COLOR_TRANSPARENT);
+
+        dc.setColor(Gfx.COLOR_BLACK, Gfx.COLOR_TRANSPARENT);
         dc.drawText(
             screenWidth * 0.5, // Center the text horizontally
             screenHeight * 0.2, // Top part of the screen
-            Gfx.FONT_LARGE,
+            Gfx.FONT_NUMBER_MEDIUM,
+            dayCountText,
+            Gfx.TEXT_JUSTIFY_CENTER | Gfx.TEXT_JUSTIFY_VCENTER
+        );
+
+        dc.setColor(0xFFCC00, Gfx.COLOR_TRANSPARENT);
+        dc.drawText(
+            screenWidth * 0.5 - 2,
+            screenHeight * 0.2 - 2,
+            Gfx.FONT_NUMBER_MEDIUM,
             dayCountText,
             Gfx.TEXT_JUSTIFY_CENTER | Gfx.TEXT_JUSTIFY_VCENTER
         );
 
         // --- Draw the data fields (date, heart rate, battery) ---
-        // Draw the date
-
         drawBattery(dc);
         drawHeartRate(dc);
         drawDate(dc);
+        // --- Draw watch hands ---
+        drawAnalogTime(dc);
 
     }
 
     function drawDate(dc) {
         var dateInfo = Greg.info(Time.now(), Time.FORMAT_MEDIUM);
-        var dateString = Lang.format("$1$ $2$ $3$", [dateInfo.day_of_week, dateInfo.month, dateInfo.day]);
+        var dateString = Lang.format("$1$ $2$", [dateInfo.day_of_week, dateInfo.day]);
         dc.setColor(Gfx.COLOR_WHITE, Gfx.COLOR_TRANSPARENT);
         dc.drawText(
             screenWidth * 0.93, // X position
@@ -136,8 +151,8 @@ class DayCounterWatchFaceView extends Ui.WatchFace {
             dateString,
             Gfx.TEXT_JUSTIFY_RIGHT | Gfx.TEXT_JUSTIFY_VCENTER
         );
-
     }
+
     function drawBattery(dc) {
         var battery = Sys.getSystemStats().battery;
         var batteryResource =
@@ -163,7 +178,6 @@ class DayCounterWatchFaceView extends Ui.WatchFace {
             format("$1$%", [battery.format("%d")]),
             Gfx.TEXT_JUSTIFY_LEFT | Gfx.TEXT_JUSTIFY_VCENTER
         );
-        
     }
 
     function drawHeartRate(dc) {
@@ -188,4 +202,69 @@ class DayCounterWatchFaceView extends Ui.WatchFace {
         }
     }
 
+    function drawAnalogTime(dc) {
+        var now = Sys.getClockTime();
+        var hours = now.hour % 12;
+        var minutes = now.min;
+        var seconds = now.sec;
+
+        // Calculate angles for the hands
+        var hourAngle = (hours + minutes / 60.0) * (Math.PI / 6); // 30 degrees per hour
+        var minuteAngle = (minutes + seconds / 60.0) * (Math.PI / 30); // 6 degrees per minute
+        // var secondAngle = seconds * (Math.PI / 30); // 6 degrees per second
+
+        // Draw the hands
+        // drawHand(dc, hourAngle, screenWidth * 0.25, Gfx.COLOR_WHITE, Gfx.COLOR_WHITE);
+        // drawHand(dc, minuteAngle, screenWidth * 0.4, Gfx.COLOR_WHITE, Gfx.COLOR_BLACK);
+        drawRotatedHand(dc, minuteAngle, screenWidth * 0.45, Gfx.COLOR_BLACK, Gfx.COLOR_WHITE);
+        drawRotatedHand(dc, hourAngle, screenWidth * 0.25, Gfx.COLOR_WHITE, Gfx.COLOR_BLACK);
+    }
+
+    const HAND_WIDTH = 8.0;
+    //! A utility function to draw a rotated rectangle for the watch hands.
+    //! @param dc The drawing context.
+    //! @param height The length of the hand.
+    //! @param angle The angle in radians.
+    function drawRotatedHand(dc, angle, height, color_out, color_fill) {
+        var halfWidth = HAND_WIDTH / 2.0;
+
+        // Define the unrotated vertices of the rectangle.
+        var points = [
+            [-halfWidth, -height], // Top-left
+            [halfWidth, -height],  // Top-right
+            [halfWidth, -10],        // Bottom-right
+            [-halfWidth, -10]        // Bottom-left
+        ];
+
+        // Rotate and translate the points.
+        var rotatedPoints = new [4];
+        var cos = Math.cos(angle);
+        var sin = Math.sin(angle);
+        
+        for (var i = 0; i < 4; i++) {
+            var x = points[i][0];
+            var y = points[i][1];
+            
+            // Apply rotation
+            var newX = x * cos - y * sin;
+            var newY = x * sin + y * cos;
+            
+            // Translate to the center of the watch face
+            rotatedPoints[i] = [centerX + newX, centerY + newY];
+        }
+
+        // Draw the polygon
+        dc.setColor(color_out, color_fill);
+        dc.setPenWidth(1);
+        dc.fillPolygon(rotatedPoints);
+        dc.setColor(color_fill, color_fill);
+        dc.setPenWidth(1);
+        for (var i = 0; i < 4; i++) {
+            var nextIndex = (i + 1) % 4;
+            dc.drawLine(
+                rotatedPoints[i][0], rotatedPoints[i][1],
+                rotatedPoints[nextIndex][0], rotatedPoints[nextIndex][1]
+            );
+        }
+    }
 }
