@@ -1,24 +1,3 @@
-// DayCounterWatchFaceApp.mc
-// This is the application entry point.
-
-using Toybox.Application as App;
-using Toybox.WatchUi as Ui;
-
-//! The main application class
-class DayCounterWatchFaceApp extends App.AppBase {
-
-    //! Constructor
-    function initialize() {
-        AppBase.initialize();
-    }
-
-    //! On app startup, create the initial view
-    //! @return Array of View and InputDelegate
-    function getInitialView() {
-        return [ new DayCounterWatchFaceView() ];
-    }
-}
-
 // DayCounterWatchFaceView.mc
 // This is the main view class where all the drawing happens.
 
@@ -26,9 +5,7 @@ using Toybox.Graphics as Gfx;
 using Toybox.WatchUi as Ui;
 using Toybox.System as Sys;
 using Toybox.Time as Time;
-using Toybox.Time.Gregorian as Greg;
 using Toybox.ActivityMonitor as Am;
-using Toybox.Sensor as Sensor;
 
 //! The main WatchFace View
 class DayCounterWatchFaceView extends Ui.WatchFace {
@@ -38,10 +15,12 @@ class DayCounterWatchFaceView extends Ui.WatchFace {
     private var screenHeight;
     private var centerX;
     private var centerY;
+    private var myFont;
 
     //! Constructor
     function initialize() {
         WatchFace.initialize();
+        myFont = Application.loadResource(Rez.Fonts.MyFont);
     }
 
     //! Load resources at startup.
@@ -54,10 +33,6 @@ class DayCounterWatchFaceView extends Ui.WatchFace {
 
         // Load the custom graphics.
         yellowRibbon = Ui.loadResource(Rez.Drawables.yellowRibbonBitmap);
-
-        // Load fonts for the data fields. You can create custom fonts if desired.
-        // fontDayCount = Ui.loadResource(Rez.Fonts.DayCountFont);
-
     }
 
     //! This method is called when the device re-enters an active state.
@@ -74,7 +49,7 @@ class DayCounterWatchFaceView extends Ui.WatchFace {
         Ui.requestUpdate();
     }
 
-    const oct_7_2023 = Greg.moment({
+    const oct_7_2023 = Time.Gregorian.moment({
         :year => 2023,
         :month => 10,
         :day => 7,
@@ -100,48 +75,35 @@ class DayCounterWatchFaceView extends Ui.WatchFace {
         dc.setColor(Gfx.COLOR_BLACK, Gfx.COLOR_BLACK);
         dc.clear();
 
-        // Draw yellow ribbon as background
+        // Draw yellow ribbon as background using the whole screen
         if (yellowRibbon != null) {
-            dc.drawScaledBitmap(
-                0, // X position
-                0, // Y position
-                screenWidth, // Width to scale to
-                screenWidth, // Height to scale to
-                yellowRibbon // Bitmap to draw
-            );
+            dc.drawScaledBitmap(0, 0, screenWidth, screenWidth, yellowRibbon);
         }
 
-        var dayCountText = daysSinceOct7().toString();
-
-        dc.setColor(Gfx.COLOR_BLACK, Gfx.COLOR_TRANSPARENT);
-        dc.drawText(
-            screenWidth * 0.5, // Center the text horizontally
-            screenHeight * 0.2, // Top part of the screen
-            Gfx.FONT_NUMBER_MEDIUM,
-            dayCountText,
-            Gfx.TEXT_JUSTIFY_CENTER | Gfx.TEXT_JUSTIFY_VCENTER
-        );
-
-        dc.setColor(0xFFCC00, Gfx.COLOR_TRANSPARENT);
-        dc.drawText(
-            screenWidth * 0.5 - 2,
-            screenHeight * 0.2 - 2,
-            Gfx.FONT_NUMBER_MEDIUM,
-            dayCountText,
-            Gfx.TEXT_JUSTIFY_CENTER | Gfx.TEXT_JUSTIFY_VCENTER
-        );
-
-        // --- Draw the data fields (date, heart rate, battery) ---
+        drawDaysCount(dc);
         drawBattery(dc);
         drawHeartRate(dc);
         drawDate(dc);
-        // --- Draw watch hands ---
         drawAnalogTime(dc);
 
     }
 
+    function drawDaysCount(dc) {
+        var dayCountText = daysSinceOct7().toString();
+        var posx = screenWidth * 0.7;
+        var posy = screenHeight * 0.2;
+        var JUST = Gfx.TEXT_JUSTIFY_CENTER | Gfx.TEXT_JUSTIFY_VCENTER;
+    
+        // draw red shadow
+        dc.setColor(Gfx.COLOR_DK_RED, Gfx.COLOR_TRANSPARENT);
+        dc.drawText(posx + 3, posy + 3, myFont, dayCountText, JUST);
+        // draw yellow text
+        dc.setColor(0xFFCC00, Gfx.COLOR_TRANSPARENT);
+        dc.drawText(posx, posy, myFont, dayCountText, JUST);
+    }
+
     function drawDate(dc) {
-        var dateInfo = Greg.info(Time.now(), Time.FORMAT_MEDIUM);
+        var dateInfo = Time.Gregorian.info(Time.now(), Time.FORMAT_MEDIUM);
         var dateString = Lang.format("$1$ $2$", [dateInfo.day_of_week, dateInfo.day]);
         dc.setColor(Gfx.COLOR_WHITE, Gfx.COLOR_TRANSPARENT);
         dc.drawText(
@@ -164,7 +126,7 @@ class DayCounterWatchFaceView extends Ui.WatchFace {
 
         dc.drawScaledBitmap(
             screenWidth * 0.1 - 40, // X position
-            screenHeight / 2 - 20, // Y position
+            screenHeight *0.5 - 20, // Y position
             40, // Width to scale to
             40, // Height to scale to
             Ui.loadResource(batteryResource) // Bitmap to draw
