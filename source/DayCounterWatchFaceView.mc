@@ -127,8 +127,8 @@ class DayCounterWatchFaceView extends Ui.WatchFace {
                         Rez.Drawables.battery100;
 
         dc.drawScaledBitmap(
-            screenWidth * 0.1 - 40, // X position
-            screenHeight *0.5 - 20, // Y position
+            screenWidth * 0.1 - 20, // X position
+            screenHeight * 0.5 - 20, // Y position
             40, // Width to scale to
             40, // Height to scale to
             Ui.loadResource(batteryResource) // Bitmap to draw
@@ -136,7 +136,7 @@ class DayCounterWatchFaceView extends Ui.WatchFace {
         dc.setColor(
             battery <= 10 ? Gfx.COLOR_RED : Gfx.COLOR_WHITE, Gfx.COLOR_TRANSPARENT);
         dc.drawText(
-            screenWidth * 0.1 + 5, // X position
+            screenWidth * 0.1 + 25, // X position
             screenHeight / 2, // Y position
             Gfx.FONT_XTINY,
             format("$1$%", [battery.format("%d")]),
