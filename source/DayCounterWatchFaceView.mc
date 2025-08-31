@@ -49,7 +49,7 @@ class DayCounterWatchFaceView extends Ui.WatchFace {
         Ui.requestUpdate();
     }
 
-    const oct_7_2023 = Time.Gregorian.moment({
+    const OCT_7_2023 = Time.Gregorian.moment({
         :year => 2023,
         :month => 10,
         :day => 7,
@@ -63,7 +63,7 @@ class DayCounterWatchFaceView extends Ui.WatchFace {
         // Get the current date
         var today = new Time.Moment(Time.today().value());
         // Calculate the difference in days
-        var duration = today.subtract(oct_7_2023);
+        var duration = today.subtract(OCT_7_2023);
         // convert seconds to days, adding 2 to include both start and end dates
         return duration.value() / (60 * 60 * 24) + 2;
     }
@@ -88,11 +88,13 @@ class DayCounterWatchFaceView extends Ui.WatchFace {
 
     }
 
+    const JUST = Gfx.TEXT_JUSTIFY_CENTER | Gfx.TEXT_JUSTIFY_VCENTER;
+
+    //! Draw the number of days since October 7, 2023
     function drawDaysCount(dc) {
         var dayCountText = daysSinceOct7().toString();
-        var posx = screenWidth * 0.7;
-        var posy = screenHeight * 0.2;
-        var JUST = Gfx.TEXT_JUSTIFY_CENTER | Gfx.TEXT_JUSTIFY_VCENTER;
+        var posx = screenWidth * 0.75;
+        var posy = screenHeight * 0.25;
     
         // draw red shadow
         dc.setColor(Gfx.COLOR_DK_RED, Gfx.COLOR_TRANSPARENT);
