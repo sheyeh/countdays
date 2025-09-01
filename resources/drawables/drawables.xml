@@ -1,11 +1,11 @@
 <drawables xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://developer.garmin.com/downloads/connect-iq/resources.xsd">
     <bitmap id="LauncherIcon" filename="launcher_icon.svg" dithering="none" />
-    <bitmap id="yellowRibbonBitmap" filename="yellow-ribbon-sq.png" />
+    <bitmap id="yellowRibbonBitmap" filename="yellow-ribbon-sq.png" scaleX="100%" scaleRelativeTo="screen" dithering="none"/>
     <!-- battery and heart icons are from https://www.flaticon.com/free-icons -->
-    <bitmap id="battery100" filename="battery-100-white.png" />
-    <bitmap id="battery75" filename="battery-75-white.png" />
-    <bitmap id="battery50" filename="battery-50-white.png" />
-    <bitmap id="battery25" filename="battery-25-white.png" />
-    <bitmap id="battery15" filename="battery-low-red.png" />
-    <bitmap id="heart" filename="heart-white.png" />
+    <bitmap id="battery100" filename="battery-100-white.png" scaleX="9%" scaleRelativeTo="screen" dithering="none"/>
+    <bitmap id="battery75" filename="battery-75-white.png" scaleX="9%" scaleRelativeTo="screen" dithering="none" />
+    <bitmap id="battery50" filename="battery-50-white.png" scaleX="9%" scaleRelativeTo="screen" dithering="none" />
+    <bitmap id="battery25" filename="battery-25-white.png" scaleX="9%" scaleRelativeTo="screen" dithering="none" />
+    <bitmap id="battery15" filename="battery-low-red.png" scaleX="9%" scaleRelativeTo="screen" dithering="none" />
+    <bitmap id="heart" filename="heart-white.png" scaleX="7%" scaleRelativeTo="screen" dithering="none" />
 </drawables>
