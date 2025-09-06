@@ -81,6 +81,8 @@ class DayCounterWatchFaceView extends Ui.WatchFace {
         drawDaysCount(dc);
         drawBattery(dc);
         drawHeartRate(dc);
+        drawFloors(dc);
+        drawSteps(dc);
         drawDate(dc);
         drawAnalogTime(dc);
     }
@@ -140,22 +142,52 @@ class DayCounterWatchFaceView extends Ui.WatchFace {
 
     function drawHeartRate(dc) {
         var hrSample = Am.getHeartRateHistory(1, true).next();
-        var hr = hrSample !=null ? hrSample.heartRate : 0;
+        var hr = hrSample != null ? hrSample.heartRate : 0;
         if (hr > 0) {
-            // heart icon is scaled to 7% of screen size in resources/drawables/drawables.xml
+            drawMetric(dc, Rez.Drawables.heart, hr, 0.425, 0.9);
+        }
+    }
+
+    function drawMetric(dc, iconResId, value, posXFactor, posYFactor) {
+        if (value != null) {
             dc.drawBitmap(
-                screenWidth * 0.425,
-                screenHeight * 0.9,
-                Ui.loadResource(Rez.Drawables.heart)
+                screenWidth * posXFactor,
+                screenHeight * posYFactor,
+                Ui.loadResource(iconResId)
             );
             dc.setColor(Gfx.COLOR_WHITE, Gfx.COLOR_TRANSPARENT);
             dc.drawText(
-                screenWidth * 0.505,
-                screenHeight * 0.9,
+                screenWidth * (posXFactor + 0.08),
+                screenHeight * posYFactor,
                 Gfx.FONT_XTINY,
-                format("$1$", [hr.toString()]),
+                format("$1$", [value.toString()]),
                 Gfx.TEXT_JUSTIFY_LEFT
             );
+        }
+    }
+
+    function drawFloors(dc) {
+        var info = Am.getInfo(); // make sure data is fresh
+        if (info != null && info.floorsClimbed != null) {
+            drawMetric(dc, Rez.Drawables.stairs, info.floorsClimbed, 0.64, 0.78);
+        }
+    }
+
+    function drawSteps(dc) {
+        var info = Am.getInfo(); // make sure data is fresh
+        if (info != null && info.steps != null) {
+            drawMetric(dc, Rez.Drawables.steps, thousandsSeparator(info.steps), 0.2, 0.78);
+        }
+    }
+
+    function thousandsSeparator(num) {
+        if (num < 1000) {
+            return num.toString();
+        } else if (num < 1e6) {
+            return (num / 1000).format("%d") + "," + (num % 1000).format("%03d");
+        } else {
+            // Handle the very unlikely event of more than a million steps in one day
+            return (num / 1e6).format("%.1f") + "M";
         }
     }
 

@@ -8,4 +8,6 @@
     <bitmap id="battery25" filename="battery-25-white.png" scaleX="9%" scaleRelativeTo="screen" dithering="none" />
     <bitmap id="battery15" filename="battery-low-red.png" scaleX="9%" scaleRelativeTo="screen" dithering="none" />
     <bitmap id="heart" filename="heart-white.png" scaleX="7%" scaleRelativeTo="screen" dithering="none" />
+    <bitmap id="stairs" filename="stairs-white.png" scaleX="7%" scaleRelativeTo="screen" dithering="none" />
+    <bitmap id="steps" filename="steps-white.png" scaleX="7%" scaleRelativeTo="screen" dithering="none" />
 </drawables>
