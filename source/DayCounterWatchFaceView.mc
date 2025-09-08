@@ -16,11 +16,26 @@ class DayCounterWatchFaceView extends Ui.WatchFace {
     private var centerX;
     private var centerY;
     private var myFont;
+    private var hand_width;
+    private var pen_width;
+    private var hasFloorsClimbed;
+    private var stepsXPos;
+
+    private var heartIcon;
+    private var stairsIcon;
+    private var stepsIcon;
+
+    private var batteryIcon100;
+    private var batteryIcon75;
+    private var batteryIcon50;
+    private var batteryIcon25;
+    private var batteryIconLow;
 
     //! Constructor
     function initialize() {
         WatchFace.initialize();
-        myFont = Application.loadResource(Rez.Fonts.MyFont);
+        hasFloorsClimbed = Am.getInfo() != null && Am.getInfo() has :floorsClimbed;
+        stepsXPos = hasFloorsClimbed ? 0.2 : 0.425;
     }
 
     //! Load resources at startup.
@@ -31,8 +46,28 @@ class DayCounterWatchFaceView extends Ui.WatchFace {
         centerX = screenWidth / 2;
         centerY = screenHeight / 2;
 
+        var hi_res = screenWidth > 280;
         // Load the custom graphics.
-        yellowRibbon = Ui.loadResource(Rez.Drawables.yellowRibbonBitmap);
+        yellowRibbon = hi_res
+            ? Ui.loadResource(Rez.Drawables.yellowRibbonBitmap)
+            : Ui.loadResource(Rez.Drawables.yellowRibbonBitmapLow);
+
+        myFont = hi_res
+            ? Ui.loadResource(Rez.Fonts.MyFont)
+            : Ui.loadResource(Rez.Fonts.MyFont8);
+
+        heartIcon = Ui.loadResource(Rez.Drawables.heart);
+        stairsIcon = Ui.loadResource(Rez.Drawables.stairs);
+        stepsIcon = Ui.loadResource(Rez.Drawables.steps);
+
+        batteryIcon100 = Ui.loadResource(Rez.Drawables.battery100);
+        batteryIcon75 = Ui.loadResource(Rez.Drawables.battery75);
+        batteryIcon50 = Ui.loadResource(Rez.Drawables.battery50);
+        batteryIcon25 = Ui.loadResource(Rez.Drawables.battery25);
+        batteryIconLow = Ui.loadResource(Rez.Drawables.battery15);
+    
+        hand_width = hi_res ? 10.0 : 6.0;
+        pen_width = hi_res ? 3 : 2;
     }
 
     //! This method is called when the device re-enters an active state.
@@ -97,7 +132,7 @@ class DayCounterWatchFaceView extends Ui.WatchFace {
     
         // draw red shadow
         dc.setColor(Gfx.COLOR_DK_RED, Gfx.COLOR_TRANSPARENT);
-        dc.drawText(posx + 3, posy + 3, myFont, dayCountText, JUST);
+        dc.drawText(posx + 2, posy + 2, myFont, dayCountText, JUST);
         // draw yellow text
         dc.setColor(0xFFCC00, Gfx.COLOR_TRANSPARENT);
         dc.drawText(posx, posy, myFont, dayCountText, JUST);
@@ -120,15 +155,15 @@ class DayCounterWatchFaceView extends Ui.WatchFace {
 
     function drawBattery(dc) {
         var battery = Sys.getSystemStats().battery;
-        var batteryResource =
-                        battery <= RED_BATTERY_LEVEL ? Rez.Drawables.battery15 : 
-                        battery < 30 ? Rez.Drawables.battery25 :
-                        battery < 60 ? Rez.Drawables.battery50 :
-                        battery < 85 ? Rez.Drawables.battery75 :
-                        Rez.Drawables.battery100;
+        var batteryIcon =
+                    battery <= RED_BATTERY_LEVEL ? batteryIconLow : 
+                    battery < 30 ? batteryIcon25 :
+                    battery < 60 ? batteryIcon50 :
+                    battery < 85 ? batteryIcon75 :
+                    batteryIcon100;
 
         // battery icons are scaled to 9% of screen size in resources/drawables/drawables.xml
-        dc.drawBitmap(screenWidth * 0.055, screenHeight * 0.455, Ui.loadResource(batteryResource));
+        dc.drawBitmap(screenWidth * 0.055, screenHeight * 0.455, batteryIcon);
         dc.setColor(
             battery <= RED_BATTERY_LEVEL ? Gfx.COLOR_RED : Gfx.COLOR_WHITE, Gfx.COLOR_TRANSPARENT);
         dc.drawText(
@@ -144,16 +179,16 @@ class DayCounterWatchFaceView extends Ui.WatchFace {
         var hrSample = Am.getHeartRateHistory(1, true).next();
         var hr = hrSample != null ? hrSample.heartRate : 0;
         if (hr > 0) {
-            drawMetric(dc, Rez.Drawables.heart, hr, 0.425, 0.9);
+            drawMetric(dc, heartIcon, hr, 0.425, 0.9);
         }
     }
 
-    function drawMetric(dc, iconResId, value, posXFactor, posYFactor) {
+    function drawMetric(dc, icon, value, posXFactor, posYFactor) {
         if (value != null) {
             dc.drawBitmap(
                 screenWidth * posXFactor,
                 screenHeight * posYFactor,
-                Ui.loadResource(iconResId)
+                icon
             );
             dc.setColor(Gfx.COLOR_WHITE, Gfx.COLOR_TRANSPARENT);
             dc.drawText(
@@ -167,16 +202,19 @@ class DayCounterWatchFaceView extends Ui.WatchFace {
     }
 
     function drawFloors(dc) {
+        if (hasFloorsClimbed == false) {
+            return;
+        } 
         var info = Am.getInfo(); // make sure data is fresh
         if (info != null && info.floorsClimbed != null) {
-            drawMetric(dc, Rez.Drawables.stairs, info.floorsClimbed, 0.64, 0.78);
+            drawMetric(dc, stairsIcon, info.floorsClimbed, 0.64, 0.78);
         }
     }
 
     function drawSteps(dc) {
         var info = Am.getInfo(); // make sure data is fresh
         if (info != null && info.steps != null) {
-            drawMetric(dc, Rez.Drawables.steps, thousandsSeparator(info.steps), 0.2, 0.78);
+            drawMetric(dc, stepsIcon, thousandsSeparator(info.steps), stepsXPos, 0.78);
         }
     }
 
@@ -195,18 +233,17 @@ class DayCounterWatchFaceView extends Ui.WatchFace {
         var now = Sys.getClockTime();
         var hours = now.hour % 12;
         var minutes = now.min;
-        var seconds = now.sec;
+        var seconds = 15 * (now.sec / 15); // Round to nearest 10 seconds for smoother movement
 
         // Calculate angles for the hands
         var hourAngle = (hours + minutes / 60.0) * (Math.PI / 6); // 30 degrees per hour
         var minuteAngle = (minutes + seconds / 60.0) * (Math.PI / 30); // 6 degrees per minute
 
         // Draw the hands
-        drawRotatedHand(dc, minuteAngle, screenWidth * 0.45, Gfx.COLOR_BLACK, Gfx.COLOR_WHITE);
+        drawRotatedHand(dc, minuteAngle, screenWidth * 0.45, Gfx.COLOR_TRANSPARENT, Gfx.COLOR_WHITE);
         drawRotatedHand(dc, hourAngle, screenWidth * 0.25, Gfx.COLOR_WHITE, Gfx.COLOR_BLACK);
     }
 
-    const HAND_WIDTH = 8.0;
     //! A utility function to draw a rotated rectangle for the watch hands.
     //! @param dc The drawing context.
     //! @param angle The angle in radians.
@@ -214,7 +251,7 @@ class DayCounterWatchFaceView extends Ui.WatchFace {
     //! @param color_fill The fill color of the hand.
     //! @param color_out The outline color of the hand.
     function drawRotatedHand(dc, angle, height, color_fill, color_out) {
-        var halfWidth = HAND_WIDTH / 2.0;
+        var halfWidth = hand_width / 2.0;
 
         // Define the unrotated vertices of the rectangle.
         var points = [
@@ -247,7 +284,7 @@ class DayCounterWatchFaceView extends Ui.WatchFace {
         dc.setPenWidth(1);
         dc.fillPolygon(rotatedPoints);
         dc.setColor(color_out, color_out);
-        dc.setPenWidth(1);
+        dc.setPenWidth(pen_width);
         for (var i = 0; i < 4; i++) {
             var nextIndex = (i + 1) % 4;
             dc.drawLine(

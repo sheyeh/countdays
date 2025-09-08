@@ -1,3 +1,4 @@
 <fonts>
     <font id="MyFont" filename="fonts/myfont.fnt" />
+    <font id="MyFont8" filename="fonts/myfont8.fnt" />
 </fonts>
